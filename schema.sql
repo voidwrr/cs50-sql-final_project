@@ -9,7 +9,7 @@ CREATE TABLE "players" (
 );
 
 --The characters of my players
-CREATE TABLE "playable_characters" (
+CREATE TABLE "chars" (
     "id" INTEGER,
     "player_id" INTEGER,
     "first_name" TEXT NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE "playable_characters" (
 );
 
 --The non-playable characters of my campaigns
-CREATE TABLE "non_playable_characters" (
+CREATE TABLE "npcs" (
     "id" INTEGER,
     "first_name" TEXT NOT NULL,
     "middle_name" TEXT,

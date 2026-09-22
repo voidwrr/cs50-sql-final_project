@@ -1,6 +1,6 @@
 # Design Document
 
-By YOUR NAME HERE
+By João Victor da Cunha Salvador
 
 Video overview: <URL HERE>
 
