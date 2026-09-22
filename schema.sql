@@ -1,3 +1,5 @@
+--A
+
 --The players on my campaigns
 CREATE TABLE "players" (
     "id" INTEGER,

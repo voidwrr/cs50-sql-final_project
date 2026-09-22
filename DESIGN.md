@@ -6,11 +6,11 @@ Video overview: <URL HERE>
 
 ## Scope
 
-In this section you should answer the following questions:
+Void's World is a database designed to store and manage data related to tabletop RPG campaigns set within a custom-built Dungeons and Dragons universe. The primary goal of this database is to track players and the characters they played across different campaigns, as well as the specific era of the universe in which each campaign takes place and each character exists. Additionally, it records the magic items and spells possessed by each character, along with non-playable characters (NPCs), key locations, and historical eras.
 
-* What is the purpose of your database?
-* Which people, places, things, etc. are you including in the scope of your database?
-* Which people, places, things, etc. are *outside* the scope of your database?
+To keep the database focused and efficient, general mechanics, non-magical inventory, and standard equipment are excluded. The scope is strictly limited to core character details like classes, levels, races, and status, magical capabilities and equipment such as spells and magic items, and world lore including historical eras, locations, campaigns, and NPCs.
+
+The main objective is to enable comprehensive queries and views that allow a Dungeon Master to retrieve all relevant summary information for any given character, city, NPC, or era within the universe in a single call.
 
 ## Functional Requirements
 
