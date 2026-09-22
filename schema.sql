@@ -15,8 +15,8 @@ CREATE TABLE "playable_characters" (
     "first_name" TEXT NOT NULL,
     "middle_name" TEXT,
     "last_name" TEXT,
-    PRIMARY KEY("id")
-    FOREIGN KEY("player_id") "players"."id"
+    PRIMARY KEY("id"),
+    FOREIGN KEY("player_id") REFERENCES "players"("id") ON DELETE SET NULL
 );
 
 --The non-playable characters of my campaigns
