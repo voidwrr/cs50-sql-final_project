@@ -21,5 +21,9 @@ CREATE TABLE "playable_characters" (
 
 --The non-playable characters of my campaigns
 CREATE TABLE "non_playable_characters" (
-    "id"
-)
+    "id" INTEGER,
+    "first_name" TEXT NOT NULL,
+    "middle_name" TEXT,
+    "last_name" TEXT,
+    PRIMARY KEY("id")
+);
