@@ -8,7 +8,7 @@ CREATE TABLE "ages" (
     PRIMARY KEY("id")
 );
 
---Nations of the world
+--Continents of the world
 
 --The players on my campaigns
 CREATE TABLE "players" (
