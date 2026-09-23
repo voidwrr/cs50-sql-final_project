@@ -18,10 +18,8 @@ The main objective is to enable comprehensive analytical queries and views that 
 
 ## Functional Requirements
 
-In this section you should answer the following questions:
-
-* What should a user be able to do with your database?
-* What's beyond the scope of what a user should be able to do with your database?
+A user of the My RPG World database should be able to query complete profiles for player characters and non-playable characters, including their full names, race, primary and secondary classes for multiclassed characters, home or current city, and historical era timeline. The database allows users to retrieve character and NPC inventories, tracking all magic items owned and spells known or prepared by each individual. Users can track players across multiple campaigns by linking player accounts to the specific characters they have played in various games, as well as view faction memberships detailing which characters or NPCs belong to specific organizations and their given rank within those factions. Furthermore, users can explore geographic and temporal hierarchies by querying which cities belong to specific regions, which regions belong to continents, and which eras define the lifespan of cities, factions, campaigns, and characters. The system enables executing analytical views and complex joins to summarize world lore and campaign states for a Dungeon Master in a single query.
+Beyond the scope of what a user should be able to do with the database includes managing real-time combat mechanics, such as tracking hit points, initiative order, round-by-round action logs, or temporary status conditions during encounters. Cataloging non-magical inventory and mundane gear, including basic supplies, torches, ropes, arrows, or currency and wallet balances, is explicitly excluded. The database is not intended to track active spell slot consumption, daily resource usage, or temporary buff and debuff durations per session. Finally, storing full Dungeons and Dragons rulebook material, including comprehensive subclass feature progression trees, full spell descriptions, or complete monster stat blocks beyond core character attributes, remains outside the scope of user capabilities.
 
 ## Representation
 
