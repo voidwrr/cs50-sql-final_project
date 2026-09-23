@@ -37,7 +37,7 @@ CREATE TABLE "cities" (
     "id" INTEGER,
     "region_id" INTEGER NOT NULL,
     "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER,
+    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"),
     "name" TEXT NOT NULL UNIQUE,
     "type" TEXT NOT NULL,
     "description" TEXT,
@@ -58,7 +58,7 @@ CREATE TABLE "campaigns" (
     "age_id" INTEGER,
     "description" TEXT,
     "start_date" DATE DEFAULT CURRENT_DATE NOT NULL,
-    "end_date" DATE,
+    "end_date" DATE CHECK ("end_age" IS NULL OR "end_age" >= "start_age"),
     PRIMARY KEY("id"),
     FOREIGN KEY("age_id") REFERENCES "ages"("id")
 );
@@ -125,7 +125,7 @@ CREATE TABLE "races" (
 CREATE TABLE "factions" (
     "id" INTEGER,
     "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER,
+    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"),
     "city_id" INTEGER,
     "name" TEXT NOT NULL UNIQUE,
     "description" TEXT,
