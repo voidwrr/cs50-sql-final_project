@@ -1,4 +1,14 @@
---A
+--Ages of the world
+CREATE TABLE "ages" (
+    "id" INTEGER,
+    "name" TEXT NOT NULL UNIQUE,
+    "start_year" INTEGER NOT NULL, --Must have a start date (INTEGER BECAUSE IT'S A FANTASY DATE)
+    "end_year" INTEGER, --Null in case it's a current age
+    "description" TEXT,
+    PRIMARY KEY("id")
+);
+
+--Nations of the world
 
 --The players on my campaigns
 CREATE TABLE "players" (
