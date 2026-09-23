@@ -271,11 +271,11 @@ CREATE INDEX "idx_chars_start_age" ON "chars"("start_age");
 CREATE INDEX "idx_npcs_start_age" ON "npcs"("start_age");
 
 -- Optimizing junction tables search
-CREATE INDEX "idx_char_spells_spell" ON "char_spells"("spell_id");
-CREATE INDEX "idx_char_items_item" ON "char_items"("item_id");
-CREATE INDEX "idx_npc_items_item" ON "npc_items"("item_id");
-CREATE INDEX "idx_npc_spells_spell" ON "npc_spells"("spell_id");
-CREATE INDEX "idx_campaign_chars_campaign" ON "char_campaigns"("campaign_id");
+CREATE INDEX "idx_char_spells" ON "char_spells"("spell_id");
+CREATE INDEX "idx_char_items" ON "char_items"("item_id");
+CREATE INDEX "idx_npc_items" ON "npc_items"("item_id");
+CREATE INDEX "idx_npc_spells" ON "npc_spells"("spell_id");
+CREATE INDEX "idx_campaign_chars" ON "char_campaigns"("campaign_id");
 
 
 -- ============================================================================
@@ -296,7 +296,7 @@ SELECT
     class2."name" AS "secondary_class",
     class3."name" AS "third_class",
     ages."name" AS "era",
-    COALESCE(GROUP_CONCAT(factions."name", ', '), 'None') AS "factions"
+    COALESCE(GROUP_CONCAT(DISTINCT factions."name"), 'None') AS "factions"
 FROM "chars" chars
 JOIN "players" players ON chars."player_id" = players."id"
 JOIN "races" races ON chars."race_id" = races."id"
@@ -327,7 +327,7 @@ SELECT
     class3."name" AS "third_class",
     COALESCE(cities."name", 'Unknown Location') AS "city",
     ages."name" AS "origin_age",
-    COALESCE(GROUP_CONCAT(factions."name", ', '), 'None') AS "factions"
+    COALESCE(GROUP_CONCAT(DISTINCT factions."name"), 'None') AS "factions"
 FROM "npcs" npcs
 JOIN "races" races ON npcs."race_id" = races."id"
 LEFT JOIN "classes" class1 ON npcs."class" = class1."id"
@@ -435,7 +435,7 @@ SELECT
     races."name" AS "race",
     COALESCE(classes."name", 'Unclassed') AS "primary_class",
     COALESCE(cities."name", 'Unknown Location') AS "city",
-    COALESCE(GROUP_CONCAT(factions."name", ', '), 'None') AS "factions"
+    COALESCE(GROUP_CONCAT(DISTINCT factions."name"), 'None') AS "factions"
 FROM "npcs" npcs
 JOIN "races" races ON npcs."race_id" = races."id"
 LEFT JOIN "classes" classes ON npcs."class" = classes."id"
