@@ -282,8 +282,6 @@ CREATE INDEX "idx_campaign_chars_campaign" ON "char_campaigns"("campaign_id");
 -- 9.  CHARACTER'S SHEET
 -- ============================================================================
 
-
--- Character sheet
 CREATE VIEW "v_character_sheets" AS
 SELECT
         chars."id" AS "char_id",
@@ -347,3 +345,41 @@ SELECT
 FROM "npc_spells" npc_spells
 JOIN "npcs" npcs ON npc_spells."npc_id" = npcs."id"
 JOIN "spells" spells ON npc_spells."spell_id" = spells."id";
+
+
+-- ============================================================================
+-- 11.  Inventory list
+-- ============================================================================
+
+CREATE VIEW "v_inventory_list" AS
+SELECT
+    'PC' AS "entity_type",
+    TRIM(
+        chars."first_name" || ' ' ||
+        COALESCE(chars."middle_name" || ' ', '') ||
+        COALESCE(chars."last_name", '')
+    ) AS "owner_name",
+    items."name" AS "item_name",
+    items."type" AS "item_type",
+    items."rarity",
+    items."attunement" AS "requires_attunement"
+FROM "char_items" char_items
+JOIN "chars" chars ON char_items."char_id" = chars."id"
+JOIN "items" items ON char_items."item_id" = items."id"
+
+UNION ALL
+
+SELECT
+    'NPC' AS "entity_type",
+    TRIM(
+        npcs."first_name" || ' ' ||
+        COALESCE(npcs."middle_name" || ' ', '') ||
+        COALESCE(npcs."last_name", '')
+    ) AS "owner_name",
+    items."name" AS "item_name",
+    items."type" AS "item_type",
+    items."rarity",
+    items."attunement" AS "requires_attunement"
+FROM "npc_items" npc_items
+JOIN "npcs" npcs ON npc_items."npc_id" = npcs."id"
+JOIN "items" items ON npc_items."item_id" = items."id";
