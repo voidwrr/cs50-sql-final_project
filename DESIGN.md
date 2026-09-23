@@ -41,9 +41,9 @@ Constraints were applied throughout the schema to enforce domain rules and prese
 
 ## Optimizations
 
-In this section you should answer the following questions:
+The database uses indexes and views to speed up queries and simplify complex data retrieval. Indexes were created on character and non-playable character names, player links, geographic locations, and starting ages for world entities. Dedicated indexes were also added to junction tables for spells, items, and campaign enrollments to ensure fast join operations.
 
-* Which optimizations (e.g., indexes, views) did you create? Why?
+Views simplify complex join logic for common Dungeon Master tasks. The character sheet and non-playable character sheet views group character traits, classes, locations, eras, and faction memberships into a single row per entity. The world atlas view organizes cities, regions, climates, continents, and founding eras into a clear geographical layout. Finally, combined list views for spells and inventories merge player character and non-playable character records into single tables for quick reference.
 
 ## Limitations
 
