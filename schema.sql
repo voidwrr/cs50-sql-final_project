@@ -92,9 +92,44 @@ CREATE TABLE "spells" (
     "id" INTEGER,
     "name" TEXT NOT NULL UNIQUE,
     "level" INTEGER NOT NULL CHECK("level" BETWEEN 0 AND 9),
-    "school" TEXT NOT NULL CHECK("school" IN ('Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation')),
-    "casting_time" TEXT NOT NULL CHECK("casting_time" IN ('1 action', '1 bonus action', '1 reaction', '1min', '10min', '1h', '8h', '24h')),
-    "range" TEXT NOT NULL CHECK("range" IN ('Self', 'Touch', 'Sight', 'Unlimited', '10ft', '30ft', '60ft', '90ft', '120ft', '150ft', '300ft', '500ft', '1mi')),
+    "school" TEXT NOT NULL
+    CHECK("school" IN (
+        'Abjuration',
+        'Conjuration',
+        'Divination',
+        'Enchantment',
+        'Evocation',
+        'Illusion',
+        'Necromancy',
+        'Transmutation')
+    ),
+    "casting_time" TEXT NOT NULL
+    CHECK("casting_time" IN (
+        '1 action',
+        '1 bonus action',
+        '1 reaction',
+        '1min',
+        '10min',
+        '1h',
+        '8h',
+        '24h')
+    ),
+    "range" TEXT NOT NULL
+    CHECK("range" IN (
+        'Self',
+        'Touch',
+        'Sight',
+        'Unlimited',
+        '10ft',
+        '30ft',
+        '60ft',
+        '90ft',
+        '120ft',
+        '150ft',
+        '300ft',
+        '500ft',
+        '1mi')
+    ),
     "concentration" INTEGER NOT NULL DEFAULT 0 CHECK("concentration" IN (0, 1)),
      PRIMARY KEY("id")
 );
@@ -102,7 +137,15 @@ CREATE TABLE "spells" (
 CREATE TABLE "classes" (
     "id" INTEGER,
     "name" TEXT NOT NULL UNIQUE,
-    "ability" TEXT NOT NULL CHECK("ability" IN ('STR', 'AGL', 'CON', 'WIS', 'CHA', 'INT')),
+    "ability" TEXT NOT NULL
+    CHECK("ability" IN (
+        'STR',
+        'AGL',
+        'CON',
+        'WIS',
+        'CHA',
+        'INT')
+    ),
     "description" TEXT,
     PRIMARY KEY("id")
 );
