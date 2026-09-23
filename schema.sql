@@ -106,3 +106,13 @@ CREATE TABLE "spells" (
     "concentration" INTEGER NOT NULL DEFAULT 0 CHECK("concentration" IN (0, 1)),
      PRIMARY KEY("id")
 );
+
+CREATE TABLE "classes" (
+    "id" INTEGER,
+    "name" TEXT NOT NULL UNIQUE,
+    "ability" TEXT NOT NULL CHECK("ability" IN ('STR', 'AGL', 'CON', 'WIS', 'CHA', 'INT')),
+    "description" TEXT,
+    PRIMARY KEY("id")
+);
+
+
