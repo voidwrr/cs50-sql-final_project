@@ -285,7 +285,11 @@ CREATE INDEX "idx_campaign_chars_campaign" ON "char_campaigns"("campaign_id");
 CREATE VIEW "v_character_sheets" AS
 SELECT
         chars."id" AS "char_id",
-        chars."first_name" || ' ' || COALESCE(chars."middle_name" || ' ', '') || COALESCE(chars."last_name", '') AS "character_name",
+        TRIM(
+            chars."first_name" || ' ' ||
+            COALESCE(chars."middle_name" || ' ', '') ||
+            COALESCE(chars."last_name", ''
+            ) AS "character_name"),
         players."username" AS "player"
         races."name" AS "race",
         class1."name" AS "primary_class",
@@ -298,4 +302,4 @@ JOIN "races" ON chars."race_id" = races."id"
 JOIN "classes" AS class1 ON chars."class" = class1."id"
 LEFT JOIN "classes" AS class2 ON chars."second_class" = class2."id"
 LEFT JOIN "classes" AS class3 ON chars."third_class" = class3."id"
-JOIN "ages" ON chars."start_age" = ages."id"
+JOIN "ages" ON chars."start_age" = ages."id";
