@@ -191,8 +191,9 @@ CREATE TABLE "chars" (
     "last_name" TEXT,
     "race_id" INTEGER NOT NULL,
     "class" INTEGER NOT NULL,
-    "second_class" INTEGER,
-    "third_class" INTEGER,
+    "second_class" INTEGER CHECK (("second_class" IS NULL OR "second_class" != "class")),
+    "third_class" INTEGER
+    CHECK ("third_class" IS NULL OR ("third_class" != "class" AND "third_class" != "second_class")),
     "start_age" INTEGER NOT NULL,
     "end_age" INTEGER,
     PRIMARY KEY("id"),
@@ -212,8 +213,9 @@ CREATE TABLE "npcs" (
     "last_name" TEXT,
     "race_id" INTEGER NOT NULL,
     "class" INTEGER,
-    "second_class" INTEGER,
-    "third_class" INTEGER,
+    "second_class" INTEGER CHECK (("second_class" IS NULL OR "second_class" != "class")),
+    "third_class" INTEGER
+    CHECK ("third_class" IS NULL OR ("third_class" != "class" AND "third_class" != "second_class")),
     "city_id" INTEGER,
     "start_age" INTEGER NOT NULL,
     "end_age" INTEGER,
