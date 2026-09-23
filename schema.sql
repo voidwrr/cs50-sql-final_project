@@ -70,22 +70,6 @@ CREATE TABLE "players" (
 
 
 -- ============================================================================
---FACTIONS AND ORGANIZATIONS OF THE WORLD
--- ============================================================================
-CREATE TABLE "factions" (
-    "id" INTEGER,
-    "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER,
-    "city_id" INTEGER,
-    "name" TEXT NOT NULL UNIQUE,
-    "description" TEXT,
-    PRIMARY KEY("id"),
-    FOREIGN KEY("start_age") REFERENCES "ages"("id"),
-    FOREIGN KEY("end_age") REFERENCES "ages"("id"),
-    FOREIGN KEY("city_id") REFERENCES "cities"("id")
-);
-
--- ============================================================================
 --MECHANICS FROM THE RPG SYSTEM
 -- ============================================================================
 CREATE TABLE "items" (
@@ -125,6 +109,23 @@ CREATE TABLE "races" (
     "darkvision" INTEGER NOT NULL DEFAULT 0 CHECK("darkvision" IN (0, 1)),
     "description" TEXT,
     PRIMARY KEY("id")
+);
+
+
+-- ============================================================================
+--FACTIONS AND ORGANIZATIONS OF THE WORLD
+-- ============================================================================
+CREATE TABLE "factions" (
+    "id" INTEGER,
+    "start_age" INTEGER NOT NULL,
+    "end_age" INTEGER,
+    "city_id" INTEGER,
+    "name" TEXT NOT NULL UNIQUE,
+    "description" TEXT,
+    PRIMARY KEY("id"),
+    FOREIGN KEY("start_age") REFERENCES "ages"("id"),
+    FOREIGN KEY("end_age") REFERENCES "ages"("id"),
+    FOREIGN KEY("city_id") REFERENCES "cities"("id")
 );
 
 
