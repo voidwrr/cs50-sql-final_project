@@ -399,7 +399,7 @@ SELECT
     ) AS "npc_name",
     races."name" AS "race",
     COALESCE(classes."name", 'Unclassed') AS "primary_class",
-    COALESCE(cities."name", 'Unknown Location') AS "current_city",
+    COALESCE(cities."name", 'Unknown Location') AS "city",
     ages."name" AS "origin_age"
 FROM "npcs" npcs
 JOIN "races" races ON npcs."race_id" = races."id"
