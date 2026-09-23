@@ -1,6 +1,7 @@
 -- ============================================================================
 -- 1.  AGES OF THE WORLD
 -- ============================================================================
+
 CREATE TABLE "ages" (
     "id" INTEGER,
     "name" TEXT NOT NULL UNIQUE,
@@ -10,9 +11,11 @@ CREATE TABLE "ages" (
     PRIMARY KEY("id")
 );
 
+
 -- ============================================================================
 -- 2.  GEOGRAPHY OF THE WORLD
 -- ============================================================================
+
 CREATE TABLE "continents" (
     "id" INTEGER,
     "name" TEXT NOT NULL UNIQUE,
@@ -44,9 +47,11 @@ CREATE TABLE "cities" (
     FOREIGN KEY("region_id") REFERENCES "regions"("id")
 );
 
+
 -- ============================================================================
 -- 3.  CAMPAIGNS AND PLAYERS
 -- ============================================================================
+
 CREATE TABLE "campaigns" (
     "id" INTEGER,
     "title" TEXT NOT NULL UNIQUE,
@@ -72,6 +77,7 @@ CREATE TABLE "players" (
 -- ============================================================================
 -- 4.  MECHANICS FROM THE RPG SYSTEM
 -- ============================================================================
+
 CREATE TABLE "items" (
     "id" INTEGER,
     "name" TEXT NOT NULL UNIQUE,
@@ -115,6 +121,7 @@ CREATE TABLE "races" (
 -- ============================================================================
 -- 5.  FACTIONS AND ORGANIZATIONS OF THE WORLD
 -- ============================================================================
+
 CREATE TABLE "factions" (
     "id" INTEGER,
     "start_age" INTEGER NOT NULL,
