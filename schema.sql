@@ -281,3 +281,6 @@ CREATE INDEX "idx_campaign_chars_campaign" ON "char_campaigns"("campaign_id");
 -- ============================================================================
 -- 9.  VIEWS
 -- ============================================================================
+
+CREATE VIEW "v_character_sheets" AS
+SELECT "chars"."id" AS "char_id", "races"."name" AS "race", "class"."name"
