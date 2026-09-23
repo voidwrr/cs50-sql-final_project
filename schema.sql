@@ -270,5 +270,5 @@ CREATE INDEX "idx_campaigns_age" ON "campaigns"("age_id");
 CREATE INDEX "idx_char_spells" ON "char_spells"("spell_id");
 CREATE INDEX "idx_char_items" ON "char_items"("item_id");
 CREATE INDEX "idx_npc_items" ON "npc_items"("item_id");
-CREATE INDEX "idx_npc_items" ON "npc_spells"("item_id");
+CREATE INDEX "idx_npc_spells" ON "npc_spells"("spell_id");
 CREATE INDEX "idx_campaign_char" ON "char_campaigns"("char_id", "campaign_id");
