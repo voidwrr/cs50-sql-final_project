@@ -93,23 +93,8 @@ CREATE TABLE "spells" (
     "name" TEXT NOT NULL UNIQUE,
     "level" INTEGER NOT NULL CHECK("level" BETWEEN 0 AND 9),
     "school" TEXT NOT NULL CHECK("school" IN ('Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation')),
-    "casting_time" TEXT NOT NULL CHECK("casting_time" IN ('1 action', '1 bonus action', '1 reaction', '1 minute', '10 minutes', '1 hour', '8 hours', '24 hours')),
-    "range" TEXT NOT NULL "range" TEXT NOT NULL CHECK(
-        "range" IN (
-            'Self',
-            'Touch',
-            'Sight',
-            'Unlimited',
-            '10 feet',
-            '30 feet',
-            '60 feet',
-            '90 feet',
-            '120 feet',
-            '150 feet',
-            '300 feet',
-            '500 feet',
-            '1 mile'
-        ),
+    "casting_time" TEXT NOT NULL CHECK("casting_time" IN ('1 action', '1 bonus action', '1 reaction', '1min', '10min', '1h', '8h', '24h')),
+    "range" TEXT NOT NULL "range" TEXT NOT NULL CHECK("range" IN ('Self', 'Touch', 'Sight', 'Unlimited', '10ft', '30ft', '60ft', '90ft', '120ft', '150ft', '300ft', '500ft', '1mi')),
     "concentration" INTEGER NOT NULL DEFAULT 0 CHECK("concentration" IN (0, 1)),
      PRIMARY KEY("id")
 );
