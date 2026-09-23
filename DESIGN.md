@@ -6,6 +6,10 @@ By João Victor da Cunha Salvador
 
 Video overview: <URL HERE>
 
+## Terminology Disclaimer
+
+Throughout this document and schema design, several terms derived from fifth-edition Dungeons & Dragons (D&D 5e) and general tabletop role-playing games (TTRPGs) are used to categorize game mechanics and narrative elements. For clarity, PC refers to Player Characters (entities controlled by human players), while NPC denotes Non-Player Characters (world entities managed by the Dungeon Master). Terms such as Cantrips (level 0 spells), Concentration (a spell property requiring active focus), School of Magic (magical taxonomies like Evocation or Abjuration), Attunement (a mechanic limiting active magic item usage), and Multiclassing (combining multiple character classes) represent standard mechanics used to structure entities, constraints, and analytical views within the database.
+
 ## Scope
 
 My RPG World is a database designed to store and manage data related to tabletop RPG campaigns set within a custom-built Dungeons and Dragons universe. The primary goal of this database is to track players and the characters they played across different campaigns, as well as the specific era of the universe in which each campaign takes place and each character exists.
@@ -47,7 +51,6 @@ Views simplify complex join logic for common Dungeon Master tasks. The character
 
 ## Limitations
 
-In this section you should answer the following questions:
+While the database design effectively handles core worldbuilding and campaign management entities, several limitations exist due to the chosen relational constraints and schema boundaries. First, the static three-class limit in the characters and non-playable characters entities restricts endless multiclassing, which may not fully support homebrew rules or edge-case builds that span four or more classes. Second, storing historical timelines using single age references simplifies temporal queries but lacks exact numeric date or calendar tracking, making it difficult to record precise days, months, or overlapping chronological timelines within a single era.
 
-* What are the limitations of your design?
-* What might your database not be able to represent very well?
+Additionally, the schema does not natively represent dynamic mechanical state changes that occur during active tabletop gameplay. Temporary conditions, hit point fluctuations, spell slot consumption, dynamic inventory weight tracking, and spatial combat grids are intentionally omitted to maintain focus on macro-level world state rather than live session orchestration. Finally, while faction memberships support assigned rank titles, the database does not model complex political relationships or diplomatic alignments—such as wars, truces, or rivalries—directly between two distinct factions without introducing custom junction schemas.
