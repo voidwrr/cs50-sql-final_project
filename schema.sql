@@ -95,3 +95,14 @@ CREATE TABLE "items" (
     "description" TEXT,
      PRIMARY KEY("id")
 );
+
+CREATE TABLE "spells" (
+    "id" INTEGER,
+    "name" TEXT NOT NULL UNIQUE,
+    "level" INTEGER NOT NULL,
+    "school" TEXT NOT NULL,
+    "casting_time" TEXT NOT NULL,
+    "range" TEXT NOT NULL,
+    "concentration" INTEGER NOT NULL DEFAULT 0 CHECK("concentration" IN (0, 1)),
+     PRIMARY KEY("id")
+);
