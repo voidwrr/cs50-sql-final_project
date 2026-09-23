@@ -306,7 +306,7 @@ JOIN "ages" ON chars."start_age" = ages."id";
 
 
 -- ============================================================================
--- 10.  Spell list
+-- 10.  SPELL LIST
 -- ============================================================================
 
 CREATE VIEW "v_spell_list" AS
@@ -348,7 +348,7 @@ JOIN "spells" spells ON npc_spells."spell_id" = spells."id";
 
 
 -- ============================================================================
--- 11.  Inventory list
+-- 11.  INVENTORY LIST
 -- ============================================================================
 
 CREATE VIEW "v_inventory_list" AS
@@ -383,3 +383,26 @@ SELECT
 FROM "npc_items" npc_items
 JOIN "npcs" npcs ON npc_items."npc_id" = npcs."id"
 JOIN "items" items ON npc_items."item_id" = items."id";
+
+
+-- ============================================================================
+-- 12.  NPC'S LIST
+-- ============================================================================
+
+CREATE VIEW "v_npcs_list" AS
+SELECT
+    npcs."id" AS "npc_id",
+    TRIM(
+        npcs."first_name" || ' ' ||
+        COALESCE(npcs."middle_name" || ' ', '') ||
+        COALESCE(npcs."last_name", '')
+    ) AS "npc_name",
+    races."name" AS "race",
+    COALESCE(classes."name", 'Unclassed') AS "primary_class",
+    COALESCE(cities."name", 'Unknown Location') AS "current_city",
+    ages."name" AS "origin_age"
+FROM "npcs" npcs
+JOIN "races" races ON npcs."race_id" = races."id"
+LEFT JOIN "classes" classes ON npcs."class" = classes."id"
+LEFT JOIN "cities" cities ON npcs."city_id" = cities."id"
+JOIN "ages" ages ON npcs."start_age" = ages."id";
