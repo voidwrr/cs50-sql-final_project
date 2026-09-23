@@ -279,9 +279,11 @@ CREATE INDEX "idx_campaign_chars_campaign" ON "char_campaigns"("campaign_id");
 
 
 -- ============================================================================
--- 9.  VIEWS
+-- 9.  CHARACTER'S SHEET, INVENTORY AND LIST OF SPELLS
 -- ============================================================================
 
+
+-- Character sheet
 CREATE VIEW "v_character_sheets" AS
 SELECT
         chars."id" AS "char_id",
@@ -303,3 +305,18 @@ JOIN "classes" AS class1 ON chars."class" = class1."id"
 LEFT JOIN "classes" AS class2 ON chars."second_class" = class2."id"
 LEFT JOIN "classes" AS class3 ON chars."third_class" = class3."id"
 JOIN "ages" ON chars."start_age" = ages."id";
+
+-- List of spells
+CREATE VIEW "v_spell_list" AS
+SELECT
+    'PC' AS "entity_type",
+    TRIM(c."first_name" || ' ' || COALESCE(c."last_name", '')) AS "caster_name",
+    s."name" AS "spell_name",
+    s."level" AS "spell_level",
+    s."school",
+    s."casting_time",
+    s."range",
+    s."concentration"
+FROM "char_spells" cs
+JOIN "chars" c ON cs."char_id" = c."id"
+JOIN "spells" s ON cs."spell_id" = s."id"
