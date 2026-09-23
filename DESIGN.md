@@ -6,11 +6,15 @@ Video overview: <URL HERE>
 
 ## Scope
 
-Void's World is a database designed to store and manage data related to tabletop RPG campaigns set within a custom-built Dungeons and Dragons universe. The primary goal of this database is to track players and the characters they played across different campaigns, as well as the specific era of the universe in which each campaign takes place and each character exists. Additionally, it records the magic items and spells possessed by each character, along with non-playable characters (NPCs), key locations, and historical eras.
+My RPG World is a database designed to store and manage data related to tabletop RPG campaigns set within a custom-built Dungeons and Dragons universe. The primary goal of this database is to track players and the characters they played across different campaigns, as well as the specific era of the universe in which each campaign takes place and each character exists.
 
-To keep the database focused and efficient, general mechanics, non-magical inventory, and standard equipment are excluded. The scope is strictly limited to core character details like classes, levels, races, and status, magical capabilities and equipment such as spells and magic items, and world lore including historical eras, locations, campaigns, and NPCs.
+The database records full profile tracking for both player characters and non-playable characters, including full name breakdowns, multiclassing support for up to three classes, race associations, home or current city locations, and their active timeline defined by start and end ages. It also tracks factions within the universe, their historical lifespans, and many-to-many relationships that link characters and NPCs to these organizations along with their specific rank.
 
-The main objective is to enable comprehensive queries and views that allow a Dungeon Master to retrieve all relevant summary information for any given character, city, NPC, or era within the universe in a single call.
+Magical capabilities and equipment are managed through cataloged spells with attributes like level, school, casting time, range, and concentration, as well as magic items detailing rarity, type, and attunement status. These are connected to both characters and NPCs through dedicated junction tables. The world design follows a hierarchical location model connecting cities to regions and regions to continents. Chronology and campaigns are maintained through a structured timeline of historical eras linked to cities, factions, NPCs, characters, and campaigns, which also track campaign titles, descriptions, timelines, and the Dungeon Master running them.
+
+To keep the database focused and efficient, general mechanics and mundane inventory such as non-magical equipment, ropes, torches, basic rations, and monetary transactions are explicitly excluded. Combat tracking such as real-time initiative, turn-by-turn battle logs, hit point changes, and spell slot consumption per encounter are also outside the scope. Rulebook data beyond core elements, including detailed subclass feature trees and full monster stat blocks, are excluded in favor of basic NPC profiles.
+
+The main objective is to enable comprehensive analytical queries and views that allow a Dungeon Master to retrieve all relevant summary information for any given character, city, NPC, faction, or era within the universe in a single call.
 
 ## Functional Requirements
 
