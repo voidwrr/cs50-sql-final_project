@@ -1,5 +1,5 @@
 -- ============================================================================
---AGES OF THE WORLD
+-- 1.  AGES OF THE WORLD
 -- ============================================================================
 CREATE TABLE "ages" (
     "id" INTEGER,
@@ -11,7 +11,7 @@ CREATE TABLE "ages" (
 );
 
 -- ============================================================================
---GEOGRAPHY OF THE WORLD
+-- 2.  GEOGRAPHY OF THE WORLD
 -- ============================================================================
 CREATE TABLE "continents" (
     "id" INTEGER,
@@ -45,7 +45,7 @@ CREATE TABLE "cities" (
 );
 
 -- ============================================================================
---CAMPAIGNS AND PLAYERS
+-- 3.  CAMPAIGNS AND PLAYERS
 -- ============================================================================
 CREATE TABLE "campaigns" (
     "id" INTEGER,
@@ -70,7 +70,7 @@ CREATE TABLE "players" (
 
 
 -- ============================================================================
---MECHANICS FROM THE RPG SYSTEM
+-- 4.  MECHANICS FROM THE RPG SYSTEM
 -- ============================================================================
 CREATE TABLE "items" (
     "id" INTEGER,
@@ -113,7 +113,7 @@ CREATE TABLE "races" (
 
 
 -- ============================================================================
---FACTIONS AND ORGANIZATIONS OF THE WORLD
+-- 5.  FACTIONS AND ORGANIZATIONS OF THE WORLD
 -- ============================================================================
 CREATE TABLE "factions" (
     "id" INTEGER,
@@ -130,7 +130,7 @@ CREATE TABLE "factions" (
 
 
 -- ============================================================================
---CHARACTERS AND NPCS
+-- 6.  CHARACTERS AND NPCS
 -- ============================================================================
 
 CREATE TABLE "chars" (
@@ -177,3 +177,65 @@ CREATE TABLE "npcs" (
     FOREIGN KEY("end_age") REFERENCES "ages"("id")
 );
 
+
+-- ============================================================================
+-- 7.  JUNCTION TABLES
+-- ============================================================================
+
+CREATE TABLE "char_campaigns" (
+    "char_id" INTEGER NOT NULL,
+    "campaign_id" INTEGER NOT NULL,
+    PRIMARY KEY("char_id", "campaign_id"),
+    FOREIGN KEY("char_id") REFERENCES "chars"("id") ON DELETE CASCADE,
+    FOREIGN KEY("campaign_id") REFERENCES "campaigns"("id") ON DELETE CASCADE
+);
+
+CREATE TABLE "npc_factions" (
+    "npc_id" INTEGER NOT NULL,
+    "faction_id" INTEGER NOT NULL,
+    "rank" TEXT,
+    PRIMARY KEY("npc_id", "faction_id"),
+    FOREIGN KEY("npc_id") REFERENCES "npcs"("id") ON DELETE CASCADE,
+    FOREIGN KEY("faction_id") REFERENCES "factions"("id") ON DELETE CASCADE
+);
+
+CREATE TABLE "char_factions" (
+    "char_id" INTEGER NOT NULL,
+    "faction_id" INTEGER NOT NULL,
+    "rank" TEXT,
+    PRIMARY KEY("char_id", "faction_id"),
+    FOREIGN KEY("char_id") REFERENCES "chars"("id") ON DELETE CASCADE,
+    FOREIGN KEY("faction_id") REFERENCES "factions"("id") ON DELETE CASCADE
+);
+
+CREATE TABLE "npc_items" (
+    "npc_id" INTEGER NOT NULL,
+    "item_id" INTEGER NOT NULL,
+    PRIMARY KEY("npc_id", "item_id"),
+    FOREIGN KEY("npc_id") REFERENCES "npcs"("id") ON DELETE CASCADE,
+    FOREIGN KEY("item_id") REFERENCES "items"("id") ON DELETE CASCADE
+);
+
+CREATE TABLE "char_items" (
+    "char_id" INTEGER NOT NULL,
+    "item_id" INTEGER NOT NULL,
+    PRIMARY KEY("char_id", "item_id"),
+    FOREIGN KEY("char_id") REFERENCES "chars"("id") ON DELETE CASCADE,
+    FOREIGN KEY("item_id") REFERENCES "items"("id") ON DELETE CASCADE
+);
+
+CREATE TABLE "npc_spells" (
+    "npc_id" INTEGER NOT NULL,
+    "spell_id" INTEGER NOT NULL,
+    PRIMARY KEY("npc_id", "spell_id"),
+    FOREIGN KEY("npc_id") REFERENCES "npcs"("id") ON DELETE CASCADE,
+    FOREIGN KEY("spell_id") REFERENCES "spells"("id") ON DELETE CASCADE
+);
+
+CREATE TABLE "char_spells" (
+    "char_id" INTEGER NOT NULL,
+    "spell_id" INTEGER NOT NULL,
+    PRIMARY KEY("char_id", "spell_id"),
+    FOREIGN KEY("char_id") REFERENCES "chars"("id") ON DELETE CASCADE,
+    FOREIGN KEY("spell_id") REFERENCES "spells"("id") ON DELETE CASCADE
+);
