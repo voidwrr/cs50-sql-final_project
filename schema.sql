@@ -315,27 +315,27 @@ CREATE VIEW "v_spell_list" AS
 SELECT
     'PC' AS "entity_type",
     TRIM(c."first_name" || ' ' || COALESCE(c."last_name", '')) AS "caster_name",
-    s."name" AS "spell_name",
-    s."level" AS "spell_level",
-    s."school",
-    s."casting_time",
-    s."range",
-    s."concentration"
-FROM "char_spells" cs
-JOIN "chars" c ON cs."char_id" = c."id"
-JOIN "spells" s ON cs."spell_id" = s."id"
+    spells."name" AS "spell_name",
+    spells."level" AS "spell_level",
+    spells."school",
+    spells."casting_time",
+    spells."range",
+    spells."concentration"
+FROM "char_spells" char_spells
+JOIN "chars" chars ON char_spells."char_id" = chars."id"
+JOIN "spells" spells ON char_spells."spell_id" = spells."id"
 
 UNION ALL
 
 SELECT
     'NPC' AS "entity_type",
     TRIM(n."first_name" || ' ' || COALESCE(n."last_name", '')) AS "caster_name",
-    s."name" AS "spell_name",
-    s."level" AS "spell_level",
-    s."school",
-    s."casting_time",
-    s."range",
-    s."concentration"
-FROM "npc_spells" ns
-JOIN "npcs" n ON ns."npc_id" = n."id"
-JOIN "spells" s ON ns."spell_id" = s."id";
+    spells."name" AS "spell_name",
+    spells."level" AS "spell_level",
+    spells."school",
+    spells."casting_time",
+    spells."range",
+    spells."concentration"
+FROM "npc_spells" npc_spells
+JOIN "npcs" npcs ON npc_spells."npc_id" = npcs."id"
+JOIN "spells" spells ON npc_spells."spell_id" = spells."id";
