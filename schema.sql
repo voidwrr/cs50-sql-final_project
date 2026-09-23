@@ -63,7 +63,9 @@ CREATE TABLE "players" (
     "username" TEXT NOT NULL UNIQUE,
     "first_name" TEXT,
     "last_name" TEXT,
-    "joined_at" DATE DEFAULT CURRENT_DATE NOT NULL
+    "joined_at" DATE DEFAULT CURRENT_DATE NOT NULL,
+    "active" INTEGER NOT NULL DEFAULT 1 CHECK("active" IN (0, 1)),
+    PRIMARY KEY("id")
 );
 
 
@@ -124,3 +126,23 @@ CREATE TABLE "races" (
     "description" TEXT,
     PRIMARY KEY("id")
 );
+
+
+-- ============================================================================
+--CHARACTERS AND NPCS
+-- ============================================================================
+
+CREATE TABLE "chars" (
+    "id" INTEGER,
+    "player_id" INTEGER NOT NULL,
+    "first_name" TEXT NOT NULL,
+    "middle_name" TEXT,
+    "last_name" TEXT,
+    "race_id" INTEGER NOT NULL,
+    "class" INTEGER NOT NULL,
+    "second_class" INTEGER,
+    "third_class" INTEGER,
+    "start_age" INTEGER NOT NULL,
+    "end_age" INTEGER,
+    PRIMARY KEY("id")
+)
