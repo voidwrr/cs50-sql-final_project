@@ -1,6 +1,4 @@
-# Design Document
-
-MY RPG WORLD
+# Design Document - MY RPG WORLD
 
 By João Victor da Cunha Salvador
 
