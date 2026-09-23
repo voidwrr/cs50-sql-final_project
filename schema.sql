@@ -314,7 +314,11 @@ JOIN "ages" ON chars."start_age" = ages."id";
 CREATE VIEW "v_spell_list" AS
 SELECT
     'PC' AS "entity_type",
-    TRIM(c."first_name" || ' ' || COALESCE(c."last_name", '')) AS "caster_name",
+    TRIM(
+        chars."first_name" || ' ' ||
+        COALESCE(chars."middle_name" || ' ', '') ||
+        COALESCE(chars."last_name", '')
+    ) AS "caster_name",
     spells."name" AS "spell_name",
     spells."level" AS "spell_level",
     spells."school",
@@ -329,7 +333,11 @@ UNION ALL
 
 SELECT
     'NPC' AS "entity_type",
-    TRIM(n."first_name" || ' ' || COALESCE(n."last_name", '')) AS "caster_name",
+    TRIM(
+        npcs."first_name" || ' ' ||
+        COALESCE(npcs."middle_name" || ' ', '') ||
+        COALESCE(npcs."last_name", '')
+    ) AS "caster_name",
     spells."name" AS "spell_name",
     spells."level" AS "spell_level",
     spells."school",
