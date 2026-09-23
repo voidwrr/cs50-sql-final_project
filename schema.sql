@@ -21,7 +21,6 @@ CREATE TABLE "regions" (
     "id" INTEGER,
     "continent_id" INTEGER NOT NULL,
     "name" TEXT UNIQUE NOT NULL,
-    "description" TEXT,
     "climate" TEXT,
     "description" TEXT,
     PRIMARY KEY("id"),
@@ -38,7 +37,8 @@ CREATE TABLE "cities" (
     "description" TEXT,
     PRIMARY KEY("id"),
     FOREIGN KEY("start_age") REFERENCES "ages"("id"),
-    FOREIGN KEY("end_age") REFERENCES "ages"("id")
+    FOREIGN KEY("end_age") REFERENCES "ages"("id"),
+    FOREIGN KEY("region_id") REFERENCES "region"("id")
 );
 
 
@@ -59,7 +59,7 @@ CREATE TABLE "players" (
     "username" TEXT UNIQUE NOT NULL,
     "first_name" TEXT,
     "last_name" TEXT,
-    "joined_at" DATE DEFAULT CURRENT_DATE NOT NULL,
+    "joined_at" DATE DEFAULT CURRENT_DATE NOT NULL
 );
 
 
@@ -84,7 +84,7 @@ CREATE TABLE "items" (
     "name" TEXT UNIQUE NOT NULL,
     "type" TEXT NOT NULL,
     "rarity" TEXT NOT NULL,
-    "attunement" INTEGER NOT NULL,
+    "attunement" INTEGER NOT NULL DEFAULT(0) CHECK("attunement" IN (0, 1)),
     "description" TEXT,
      PRIMARY KEY("id")
 );
