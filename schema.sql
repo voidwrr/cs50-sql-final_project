@@ -91,8 +91,8 @@ CREATE TABLE "items" (
 CREATE TABLE "spells" (
     "id" INTEGER,
     "name" TEXT NOT NULL UNIQUE,
-    "level" INTEGER NOT NULL,
-    "school" TEXT NOT NULL,
+    "level" INTEGER NOT NULL CHECK("level" BETWEEN 0 AND 9),
+    "school" TEXT NOT NULL CHECK("school" IN ('Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation')),
     "casting_time" TEXT NOT NULL,
     "range" TEXT NOT NULL,
     "concentration" INTEGER NOT NULL DEFAULT 0 CHECK("concentration" IN (0, 1)),
