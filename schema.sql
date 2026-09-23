@@ -256,19 +256,23 @@ CREATE TABLE "char_spells" (
 CREATE INDEX "idx_chars_name" ON "chars"("first_name", "last_name");
 CREATE INDEX "idx_npcs_name" ON "npcs"("first_name", "last_name");
 
---Optimizing search of chars by players
+-- Optimizing search of chars by players
 CREATE INDEX "idx_player_char" ON "chars"("player_id");
 
 -- Optimizing search by geography
 CREATE INDEX "idx_cities_region" ON "cities"("region_id");
 CREATE INDEX "idx_regions_continent" ON "regions"("continent_id");
 
--- Optimizing search by age
+-- Optimizing search by ages (temporal timeline searches)
 CREATE INDEX "idx_campaigns_age" ON "campaigns"("age_id");
+CREATE INDEX "idx_cities_start_age" ON "cities"("start_age");
+CREATE INDEX "idx_factions_start_age" ON "factions"("start_age");
+CREATE INDEX "idx_chars_start_age" ON "chars"("start_age");
+CREATE INDEX "idx_npcs_start_age" ON "npcs"("start_age");
 
 -- Optimizing junction tables search
-CREATE INDEX "idx_char_spells" ON "char_spells"("spell_id");
-CREATE INDEX "idx_char_items" ON "char_items"("item_id");
-CREATE INDEX "idx_npc_items" ON "npc_items"("item_id");
-CREATE INDEX "idx_npc_spells" ON "npc_spells"("spell_id");
-CREATE INDEX "idx_campaign_char" ON "char_campaigns"("char_id", "campaign_id");
+CREATE INDEX "idx_char_spells_spell" ON "char_spells"("spell_id");
+CREATE INDEX "idx_char_items_item" ON "char_items"("item_id");
+CREATE INDEX "idx_npc_items_item" ON "npc_items"("item_id");
+CREATE INDEX "idx_npc_spells_spell" ON "npc_spells"("spell_id");
+CREATE INDEX "idx_campaign_chars_campaign" ON "char_campaigns"("campaign_id");
