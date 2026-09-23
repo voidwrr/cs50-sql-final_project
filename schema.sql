@@ -144,5 +144,35 @@ CREATE TABLE "chars" (
     "third_class" INTEGER,
     "start_age" INTEGER NOT NULL,
     "end_age" INTEGER,
-    PRIMARY KEY("id")
-)
+    PRIMARY KEY("id"),
+    FOREIGN KEY("player_id") REFERENCES "players"("id"),
+    FOREIGN KEY("race_id") REFERENCES "races"("id"),
+    FOREIGN KEY("class") REFERENCES "class"("id"),
+    FOREIGN KEY("second_class") REFERENCES "class"("id"),
+    FOREIGN KEY("third_class") REFERENCES "class"("id"),
+    FOREIGN KEY("start_age") REFERENCES "ages"("id"),
+    FOREIGN KEY("end_age") REFERENCES "ages"("id")
+);
+
+CREATE TABLE "npcs" (
+    "id" INTEGER,
+    "first_name" TEXT NOT NULL,
+    "middle_name" TEXT,
+    "last_name" TEXT,
+    "race_id" INTEGER NOT NULL,
+    "class" INTEGER NOT NULL,
+    "second_class" INTEGER,
+    "third_class" INTEGER,
+    "city_id" INTEGER,
+    "start_age" INTEGER NOT NULL,
+    "end_age" INTEGER,
+    PRIMARY KEY("id"),
+    FOREIGN KEY("race_id") REFERENCES "races"("id"),
+    FOREIGN KEY("class") REFERENCES "class"("id"),
+    FOREIGN KEY("second_class") REFERENCES "class"("id"),
+    FOREIGN KEY("third_class") REFERENCES "class"("id"),
+    FOREIGN KEY("city_id") REFERENCES "cities"("id"),
+    FOREIGN KEY("start_age") REFERENCES "ages"("id"),
+    FOREIGN KEY("end_age") REFERENCES "ages"("id")
+);
+
