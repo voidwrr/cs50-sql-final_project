@@ -285,10 +285,10 @@ CREATE INDEX "idx_campaign_chars_campaign" ON "char_campaigns"("campaign_id");
 CREATE VIEW "v_character_sheets" AS
 SELECT
     chars."id" AS "char_id",
-    TRIM(
-        chars."first_name" || ' ' ||
-        COALESCE(chars."middle_name" || ' ', '') ||
-        COALESCE(chars."last_name", '')
+    TRIM (
+        chars."first_name" ||
+        COALESCE(' ' || chars."middle_name", '') ||
+        COALESCE(' ' || chars."last_name", '')
     ) AS "character_name",
     players."username" AS "player",
     races."name" AS "race",
@@ -316,10 +316,10 @@ GROUP BY chars."id";
 CREATE VIEW "v_npc_sheet" AS
 SELECT
     npcs."id" AS "npc_id",
-    TRIM(
-        npcs."first_name" || ' ' ||
-        COALESCE(npcs."middle_name" || ' ', '') ||
-        COALESCE(npcs."last_name", '')
+    TRIM (
+        chars."first_name" ||
+        COALESCE(' ' || chars."middle_name", '') ||
+        COALESCE(' ' || chars."last_name", '')
     ) AS "npc_name",
     races."name" AS "race",
     COALESCE(class1."name", 'Unclassed') AS "primary_class",
@@ -347,10 +347,10 @@ GROUP BY npcs."id";
 CREATE VIEW "v_spell_list" AS
 SELECT
     'PC' AS "entity_type",
-    TRIM(
-        chars."first_name" || ' ' ||
-        COALESCE(chars."middle_name" || ' ', '') ||
-        COALESCE(chars."last_name", '')
+    TRIM (
+        chars."first_name" ||
+        COALESCE(' ' || chars."middle_name", '') ||
+        COALESCE(' ' || chars."last_name", '')
     ) AS "caster_name",
     spells."name" AS "spell_name",
     spells."level" AS "spell_level",
@@ -366,10 +366,10 @@ UNION ALL
 
 SELECT
     'NPC' AS "entity_type",
-    TRIM(
-        npcs."first_name" || ' ' ||
-        COALESCE(npcs."middle_name" || ' ', '') ||
-        COALESCE(npcs."last_name", '')
+    TRIM (
+        chars."first_name" ||
+        COALESCE(' ' || chars."middle_name", '') ||
+        COALESCE(' ' || chars."last_name", '')
     ) AS "caster_name",
     spells."name" AS "spell_name",
     spells."level" AS "spell_level",
@@ -389,10 +389,10 @@ JOIN "spells" spells ON npc_spells."spell_id" = spells."id";
 CREATE VIEW "v_inventory_list" AS
 SELECT
     'PC' AS "entity_type",
-    TRIM(
-        chars."first_name" || ' ' ||
-        COALESCE(chars."middle_name" || ' ', '') ||
-        COALESCE(chars."last_name", '')
+    TRIM (
+        chars."first_name" ||
+        COALESCE(' ' || chars."middle_name", '') ||
+        COALESCE(' ' || chars."last_name", '')
     ) AS "owner_name",
     items."name" AS "item_name",
     items."type" AS "item_type",
@@ -406,10 +406,10 @@ UNION ALL
 
 SELECT
     'NPC' AS "entity_type",
-    TRIM(
-        npcs."first_name" || ' ' ||
-        COALESCE(npcs."middle_name" || ' ', '') ||
-        COALESCE(npcs."last_name", '')
+    TRIM (
+        chars."first_name" ||
+        COALESCE(' ' || chars."middle_name", '') ||
+        COALESCE(' ' || chars."last_name", '')
     ) AS "owner_name",
     items."name" AS "item_name",
     items."type" AS "item_type",
@@ -427,10 +427,10 @@ JOIN "items" items ON npc_items."item_id" = items."id";
 CREATE VIEW "v_npc_list" AS
 SELECT
     npcs."id" AS "npc_id",
-    TRIM(
-        npcs."first_name" || ' ' ||
-        COALESCE(npcs."middle_name" || ' ', '') ||
-        COALESCE(npcs."last_name", '')
+    TRIM (
+        chars."first_name" ||
+        COALESCE(' ' || chars."middle_name", '') ||
+        COALESCE(' ' || chars."last_name", '')
     ) AS "npc_name",
     races."name" AS "race",
     COALESCE(classes."name", 'Unclassed') AS "primary_class",
