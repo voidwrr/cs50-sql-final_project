@@ -115,4 +115,12 @@ CREATE TABLE "classes" (
     PRIMARY KEY("id")
 );
 
-
+CREATE TABLE "races" (
+    "id" INTEGER,
+    "name" TEXT NOT NULL UNIQUE,
+    "size" TEXT,
+    "speed" INTEGER NOT NULL DEFAULT 30,
+    "darkvision" INTEGER NOT NULL DEFAULT 0 CHECK("darkvision" IN (0, 1)),
+    "description" TEXT,
+    PRIMARY KEY("id")
+);
