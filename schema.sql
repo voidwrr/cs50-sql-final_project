@@ -276,3 +276,8 @@ CREATE INDEX "idx_char_items_item" ON "char_items"("item_id");
 CREATE INDEX "idx_npc_items_item" ON "npc_items"("item_id");
 CREATE INDEX "idx_npc_spells_spell" ON "npc_spells"("spell_id");
 CREATE INDEX "idx_campaign_chars_campaign" ON "char_campaigns"("campaign_id");
+
+
+-- ============================================================================
+-- 9.  VIEWS
+-- ============================================================================
