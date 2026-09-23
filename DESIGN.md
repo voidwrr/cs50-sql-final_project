@@ -31,6 +31,8 @@ The database represents core entities divided into world mechanics, geography, o
 
 RPG mechanics use items, spells, classes, and races as catalog entities. Items store a unique name, type, rarity, an attunement flag, and a text description. Spells record a unique name, spell level as an integer, school, casting time, range, a concentration flag, and description text. Classes define character dnd classes using a unique name, a primary ability score abbreviation, and a description, while races store a unique name, size category, movement speed integer, darkvision flag, and description text. Factions capture in-universe organizations with a unique name, description, founding and disbanding ages, and an optional home city foreign key. Characters and non-playable characters form the primary actors, storing full name fields, race foreign keys, up to three class foreign keys to support multiclassing, home city references, and active age lifespans. Player characters additionally link to a player foreign key, while non-playable characters allow optional class assignments. Many-to-many associations for items, spells, factions, and campaign participations are resolved using dedicated junction tables storing pair-wise integer foreign keys and contextual attributes like faction ranks.
 
+
+
 ### Relationships
 
 ![diagram](diagram.jpeg)
