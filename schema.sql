@@ -246,3 +246,24 @@ CREATE TABLE "char_spells" (
     FOREIGN KEY("char_id") REFERENCES "chars"("id") ON DELETE CASCADE,
     FOREIGN KEY("spell_id") REFERENCES "spells"("id") ON DELETE CASCADE
 );
+
+
+-- ============================================================================
+-- 8.  OPTIMIZATION
+-- ============================================================================
+
+-- Otimiza a busca de personagens e NPCs pelo nome
+CREATE INDEX "idx_chars_name" ON "chars"("first_name", "last_name");
+CREATE INDEX "idx_npcs_name" ON "npcs"("first_name", "last_name");
+
+-- Otimiza a busca e junções por localização geográfica
+CREATE INDEX "idx_cities_region" ON "cities"("region_id");
+CREATE INDEX "idx_regions_continent" ON "regions"("continent_id");
+
+-- Otimiza consultas frequentes por era histórica
+CREATE INDEX "idx_campaigns_age" ON "campaigns"("age_id");
+CREATE INDEX "idx_factions_city" ON "factions"("city_id");
+
+-- Otimiza as junções N:M mais consultadas
+CREATE INDEX "idx_char_spells_spell" ON "char_spells"("spell_id");
+CREATE INDEX "idx_char_items_item" ON "char_items"("item_id");
