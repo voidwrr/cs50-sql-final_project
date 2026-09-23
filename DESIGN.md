@@ -27,12 +27,7 @@ Beyond the scope of what a user should be able to do with the database includes 
 
 ### Entities
 
-In this section you should answer the following questions:
-
-* Which entities will you choose to represent in your database?
-* What attributes will those entities have?
-* Why did you choose the types you did?
-* Why did you choose the constraints you did?
+The database represents core entities divided into world mechanics, geography, organizations, campaigns, and characters. The ages entity stores historical eras using an integer primary key, a unique text name, start and end years as integers (because it uses a fantastic system of counting years), and a text description. Geography is structured through continents, regions, and cities. Continents store a primary key, a unique text name, and a text description. Regions reference a continent through an integer foreign key and store a unique name, climate text, and description. Cities link to regions and ages via integer foreign keys and record a unique name, settlement type text, and description. Campaigns track campaign titles, descriptions, and start and end dates, linked to historical ages through foreign keys, while players store user profiles with a unique username, full name text fields, a registration date, and an active status flag
 
 ### Relationships
 
