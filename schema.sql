@@ -1,4 +1,6 @@
+-- ============================================================================
 --AGES OF THE WORLD
+-- ============================================================================
 CREATE TABLE "ages" (
     "id" INTEGER,
     "name" TEXT NOT NULL UNIQUE,
@@ -8,11 +10,12 @@ CREATE TABLE "ages" (
     PRIMARY KEY("id")
 );
 
-
+-- ============================================================================
 --GEOGRAPHY OF THE WORLD
+-- ============================================================================
 CREATE TABLE "continents" (
     "id" INTEGER,
-    "name" TEXT UNIQUE NOT NULL,
+    "name" TEXT NOT NULL UNIQUE,
     "description" TEXT,
     PRIMARY KEY("id")
 );
@@ -20,7 +23,7 @@ CREATE TABLE "continents" (
 CREATE TABLE "regions" (
     "id" INTEGER,
     "continent_id" INTEGER NOT NULL,
-    "name" TEXT UNIQUE NOT NULL,
+    "name" TEXT NOT NULL UNIQUE,
     "climate" TEXT,
     "description" TEXT,
     PRIMARY KEY("id"),
@@ -32,7 +35,7 @@ CREATE TABLE "cities" (
     "region_id" INTEGER NOT NULL,
     "start_age" INTEGER NOT NULL,
     "end_age" INTEGER,
-    "name" TEXT UNIQUE NOT NULL,
+    "name" TEXT NOT NULL UNIQUE,
     "type" TEXT NOT NULL,
     "description" TEXT,
     PRIMARY KEY("id"),
@@ -41,8 +44,9 @@ CREATE TABLE "cities" (
     FOREIGN KEY("region_id") REFERENCES "region"("id")
 );
 
-
+-- ============================================================================
 --CAMPAIGNS AND PLAYERS
+-- ============================================================================
 CREATE TABLE "campaigns" (
     "id" INTEGER,
     "title" TEXT NOT NULL UNIQUE,
@@ -56,20 +60,22 @@ CREATE TABLE "campaigns" (
 
 CREATE TABLE "players" (
     "id" INTEGER,
-    "username" TEXT UNIQUE NOT NULL,
+    "username" TEXT NOT NULL UNIQUE,
     "first_name" TEXT,
     "last_name" TEXT,
     "joined_at" DATE DEFAULT CURRENT_DATE NOT NULL
 );
 
 
+-- ============================================================================
 --FACTIONS AND ORGANIZATIONS OF THE WORLD
+-- ============================================================================
 CREATE TABLE "factions" (
     "id" INTEGER,
     "start_age" INTEGER NOT NULL,
     "end_age" INTEGER,
     "city_id" INTEGER,
-    "name" TEXT UNIQUE NOT NULL,
+    "name" TEXT NOT NULL UNIQUE,
     "description" TEXT,
     PRIMARY KEY("id"),
     FOREIGN KEY("start_age") REFERENCES "ages"("id"),
@@ -77,14 +83,15 @@ CREATE TABLE "factions" (
     FOREIGN KEY("city_id") REFERENCES "cities"("id")
 );
 
-
+-- ============================================================================
 --MECHANICS FROM THE RPG SYSTEM
+-- ============================================================================
 CREATE TABLE "items" (
     "id" INTEGER,
-    "name" TEXT UNIQUE NOT NULL,
+    "name" TEXT NOT NULL UNIQUE,
     "type" TEXT NOT NULL,
     "rarity" TEXT NOT NULL,
-    "attunement" INTEGER NOT NULL DEFAULT(0) CHECK("attunement" IN (0, 1)),
+    "attunement" INTEGER NOT NULL DEFAULT 0 CHECK("attunement" IN (0, 1)),
     "description" TEXT,
      PRIMARY KEY("id")
 );
