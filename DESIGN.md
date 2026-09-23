@@ -33,6 +33,8 @@ RPG mechanics use items, spells, classes, and races as catalog entities. Items s
 
 Data types were chosen to reflect the nature of DND RPG attributes accurately while optimizing SQLite storage efficiency. Integer types are assigned to all primary keys, foreign keys, numeric measurements like movement speed, spell levels, and calendar years to allow efficient indexing, fast joins, and range filtering. Text fields are used for names, categories, descriptions, and dates. Boolean flags such as attunement, concentration, darkvision, and player active status are stored as integers using zero and one representations.
 
+Constraints were applied throughout the schema to enforce domain rules and preserve referential integrity across the database. Primary keys uniquely identify every record, while foreign keys strictly enforce valid connections between dependent entities, such as ensuring a character references an existing race, class, or player. Unique constraints prevent duplicate entries for entity names like spells, items, factions, races, and usernames. Check constraints restrict integer flags to zero or one, limit spell levels to valid ranges between zero and nine, and validate ability score strings to recognized standard primary attributes. Cascade deletion rules are applied to junction tables so that removing a character or NPC automatically cleans up associated inventory, spellbook, and faction records without leaving orphaned data or violating relational rules.
+
 ### Relationships
 
 ![diagram](diagram.jpeg)
