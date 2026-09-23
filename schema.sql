@@ -310,7 +310,38 @@ GROUP BY chars."id";
 
 
 -- ============================================================================
--- 10.  SPELL LIST
+-- 9.  CHARACTER'S SHEET
+-- ============================================================================
+
+CREATE VIEW "v_npc_sheet" AS
+SELECT
+    npcs."id" AS "npc_id",
+    TRIM(
+        npcs."first_name" || ' ' ||
+        COALESCE(npcs."middle_name" || ' ', '') ||
+        COALESCE(npcs."last_name", '')
+    ) AS "npc_name",
+    races."name" AS "race",
+    COALESCE(class1."name", 'Unclassed') AS "primary_class",
+    class2."name" AS "secondary_class",
+    class3."name" AS "third_class",
+    COALESCE(cities."name", 'Unknown Location') AS "city",
+    ages."name" AS "origin_age",
+    COALESCE(GROUP_CONCAT(factions."name", ', '), 'None') AS "factions"
+FROM "npcs" npcs
+JOIN "races" races ON npcs."race_id" = races."id"
+LEFT JOIN "classes" class1 ON npcs."class" = class1."id"
+LEFT JOIN "classes" class2 ON npcs."second_class" = class2."id"
+LEFT JOIN "classes" class3 ON npcs."third_class" = class3."id"
+LEFT JOIN "cities" cities ON npcs."city_id" = cities."id"
+JOIN "ages" ages ON npcs."start_age" = ages."id"
+LEFT JOIN "npc_factions" npc_factions ON npcs."id" = npc_factions."npc_id"
+LEFT JOIN "factions" factions ON npc_factions."faction_id" = factions."id"
+GROUP BY npcs."id";
+
+
+-- ============================================================================
+-- 11.  SPELL LIST
 -- ============================================================================
 
 CREATE VIEW "v_spell_list" AS
@@ -352,7 +383,7 @@ JOIN "spells" spells ON npc_spells."spell_id" = spells."id";
 
 
 -- ============================================================================
--- 11.  INVENTORY LIST
+-- 12.  INVENTORY LIST
 -- ============================================================================
 
 CREATE VIEW "v_inventory_list" AS
@@ -390,10 +421,10 @@ JOIN "items" items ON npc_items."item_id" = items."id";
 
 
 -- ============================================================================
--- 12.  NPC'S LIST
+-- 13.  NPC'S LIST
 -- ============================================================================
 
-CREATE VIEW "v_npcs_list" AS
+CREATE VIEW "v_npc_list" AS
 SELECT
     npcs."id" AS "npc_id",
     TRIM(
@@ -404,9 +435,11 @@ SELECT
     races."name" AS "race",
     COALESCE(classes."name", 'Unclassed') AS "primary_class",
     COALESCE(cities."name", 'Unknown Location') AS "city",
-    ages."name" AS "origin_age"
+    COALESCE(GROUP_CONCAT(factions."name", ', '), 'None') AS "factions"
 FROM "npcs" npcs
 JOIN "races" races ON npcs."race_id" = races."id"
 LEFT JOIN "classes" classes ON npcs."class" = classes."id"
 LEFT JOIN "cities" cities ON npcs."city_id" = cities."id"
-JOIN "ages" ages ON npcs."start_age" = ages."id";
+LEFT JOIN "npc_factions" npc_factions ON npcs."id" = npc_factions."npc_id"
+LEFT JOIN "factions" factions ON npc_factions."faction_id" = factions."id"
+GROUP BY npcs."id";
