@@ -1,1 +1,10 @@
--- In this SQL file, write (and comment!) the typical SQL queries users will run on your database
+-- ============================================================================
+-- MY RPG WORLD - TYPICAL SQL QUERIES
+-- ============================================================================
+
+
+
+-- Complete character sheet
+SELECT *
+FROM "v_character_sheets"
+WHERE "character_name" LIKE '%Eldrin%';
