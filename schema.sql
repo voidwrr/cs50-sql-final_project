@@ -84,8 +84,8 @@ CREATE TABLE "items" (
     "type" TEXT NOT NULL,
     "rarity" TEXT NOT NULL
     CHECK("rarity" IN (
-        'Common'
-        'Uncommon'
+        'Common',
+        'Uncommon',
         'Rare',
         'Very rare',
         'Legendary',
