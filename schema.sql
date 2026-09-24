@@ -450,32 +450,32 @@ JOIN "spells" AS spells ON npc_spells."spell_id" = spells."id";
 CREATE VIEW "v_inventory_list" AS
 SELECT
     'PC' AS "entity_type",
-    TRIM (
+    TRIM(
         chars."first_name" ||
         COALESCE(' ' || chars."middle_name", '') ||
         COALESCE(' ' || chars."last_name", '')
     ) AS "owner_name",
     items."name" AS "item_name",
     items."type" AS "item_type",
-    items."rarity",
+    items."rarity" AS "rarity",
     items."attunement" AS "requires_attunement"
-FROM "char_items" char_items
-JOIN "chars" chars ON char_items."char_id" = chars."id"
-JOIN "items" items ON char_items."item_id" = items."id"
+FROM "char_items" AS char_items
+JOIN "chars" AS chars ON char_items."char_id" = chars."id"
+JOIN "items" AS items ON char_items."item_id" = items."id"
 
 UNION ALL
 
 SELECT
     'NPC' AS "entity_type",
-    TRIM (
-        chars."first_name" ||
-        COALESCE(' ' || chars."middle_name", '') ||
-        COALESCE(' ' || chars."last_name", '')
+    TRIM(
+        npcs."first_name" ||
+        COALESCE(' ' || npcs."middle_name", '') ||
+        COALESCE(' ' || npcs."last_name", '')
     ) AS "owner_name",
     items."name" AS "item_name",
     items."type" AS "item_type",
-    items."rarity",
+    items."rarity" AS "rarity",
     items."attunement" AS "requires_attunement"
-FROM "npc_items" npc_items
-JOIN "npcs" npcs ON npc_items."npc_id" = npcs."id"
-JOIN "items" items ON npc_items."item_id" = items."id";
+FROM "npc_items" AS npc_items
+JOIN "npcs" AS npcs ON npc_items."npc_id" = npcs."id"
+JOIN "items" AS items ON npc_items."item_id" = items."id";
