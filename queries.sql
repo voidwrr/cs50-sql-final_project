@@ -69,6 +69,17 @@ JOIN "npc_factions" ON "npcs"."id" = "npc_factions"."npc_id"
 JOIN "factions" ON "npc_factions"."faction_id" = "factions"."id"
 WHERE "factions"."name" = 'Thieves Guild';
 
+-- The inventory from a certain npc
+SELECT "item_name", "item_type", "rarity", "requires_attunement"
+FROM "v_inventory_list"
+WHERE "entity_type" = 'NPC' AND "owner_name" LIKE 'Alduin%';
+
+-- The spellbook from a certain npc
+SELECT "spell_name", "spell_level", "school", "casting_time", "range", "concentration"
+FROM "v_spell_list"
+WHERE "entity_type" = 'NPC' AND "caster_name" LIKE 'Daffy Duck'
+ORDER BY "spell_level" ASC, "spell_name" ASC;
+
 
 -- ============================================================================
 -- LORE QUERIES
