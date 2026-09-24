@@ -37,7 +37,7 @@ CREATE TABLE "cities" (
     "id" INTEGER,
     "region_id" INTEGER NOT NULL,
     "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"),
+    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"), --Checking that end age is later than start age
     "name" TEXT NOT NULL UNIQUE,
     "type" TEXT NOT NULL,
     "description" TEXT,
@@ -58,7 +58,7 @@ CREATE TABLE "campaigns" (
     "age_id" INTEGER,
     "description" TEXT,
     "start_date" DATE DEFAULT CURRENT_DATE NOT NULL,
-    "end_date" DATE CHECK ("end_age" IS NULL OR "end_age" >= "start_age"),
+    "end_date" DATE CHECK ("end_date" IS NULL OR "end_date" >= "start_date"), --Checking that end date is later than start date
     PRIMARY KEY("id"),
     FOREIGN KEY("age_id") REFERENCES "ages"("id")
 );
