@@ -82,7 +82,14 @@ CREATE TABLE "items" (
     "id" INTEGER,
     "name" TEXT NOT NULL UNIQUE,
     "type" TEXT NOT NULL,
-    "rarity" TEXT NOT NULL,
+    "rarity" TEXT NOT NULL
+    CHECK("rarity" IN (
+        'Uncommon'
+        'Rare',
+        'Very rare',
+        'Legendary',
+        'Wondrous')
+    ),
     "attunement" INTEGER NOT NULL DEFAULT 0 CHECK("attunement" IN (0, 1)),
     "description" TEXT,
      PRIMARY KEY("id")
