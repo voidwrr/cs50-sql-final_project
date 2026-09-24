@@ -335,7 +335,7 @@ CREATE INDEX "idx_campaign_chars" ON "char_campaigns"("campaign_id");
 -- 9.  CHARACTER'S SHEET
 -- ============================================================================
 
-CREATE VIEW "v_character_sheets" AS
+CREATE VIEW "v_character_sheet" AS
 SELECT
     chars."id" AS "char_id",
     TRIM (
