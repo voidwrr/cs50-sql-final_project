@@ -382,7 +382,8 @@ SELECT
     COALESCE(class1."name", 'Unclassed') AS "primary_class",
     class2."name" AS "secondary_class",
     class3."name" AS "third_class",
-    COALESCE(cities."name", 'Unknown Location') AS "city",
+    COALESCE(hometown."name", 'Unknown Location') AS "hometown",
+    COALESCE(lived_at."name", 'Unknown Location') AS "lived_at",
     ages."name" AS "origin_age",
     COALESCE(GROUP_CONCAT(DISTINCT factions."name"), 'None') AS "factions"
 FROM "npcs" npcs
@@ -391,7 +392,7 @@ LEFT JOIN "classes" class1 ON npcs."class" = class1."id"
 LEFT JOIN "classes" class2 ON npcs."second_class" = class2."id"
 LEFT JOIN "classes" class3 ON npcs."third_class" = class3."id"
 LEFT JOIN "cities" hometown ON npcs."hometown_id" = cities."id"
-LEFT JOIN "cities" cities ON npcs."hometown_id" = cities."id"
+LEFT JOIN "cities" lived_at ON npcs."lived_at_id" = cities."id"
 JOIN "ages" ages ON npcs."start_age" = ages."id"
 LEFT JOIN "npc_factions" npc_factions ON npcs."id" = npc_factions."npc_id"
 LEFT JOIN "factions" factions ON npc_factions."faction_id" = factions."id"
