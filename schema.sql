@@ -202,6 +202,7 @@ CREATE TABLE "chars" (
     "second_class" INTEGER CHECK (("second_class" IS NULL OR "second_class" != "class")), -- Second class can't be the same as the first class
     "third_class" INTEGER
     CHECK ("third_class" IS NULL OR ("third_class" != "class" AND "third_class" != "second_class")), -- Third class can't be the same as the first and second class
+    "hometown_id" INTEGER,
     "start_age" INTEGER NOT NULL,
     "end_age" INTEGER,
     PRIMARY KEY("id"),
@@ -210,9 +211,10 @@ CREATE TABLE "chars" (
     FOREIGN KEY("class") REFERENCES "classes"("id"),
     FOREIGN KEY("second_class") REFERENCES "classes"("id"),
     FOREIGN KEY("third_class") REFERENCES "classes"("id"),
+    FOREIGN KEY("hometown_id") REFERENCES "cities"("id"),
     FOREIGN KEY("start_age") REFERENCES "ages"("id"),
     FOREIGN KEY("end_age") REFERENCES "ages"("id")
-);  -- As the character in the chars table are player's characters they don't need a city assigned
+);
 
 CREATE TABLE "npcs" (
     "id" INTEGER,
@@ -224,7 +226,8 @@ CREATE TABLE "npcs" (
     "second_class" INTEGER CHECK (("second_class" IS NULL OR "second_class" != "class")), -- Second class can't be the same as the first class
     "third_class" INTEGER
     CHECK ("third_class" IS NULL OR ("third_class" != "class" AND "third_class" != "second_class")), -- Third class can't be the same as the first and second class
-    "city_id" INTEGER, -- There are npcs with unknown location
+    "hometown_id" INTEGER, -- There are npcs with unknown location
+    "lived_at_id" INTEGER, -- To npcs that have an actual city that they lived assigned
     "start_age" INTEGER NOT NULL,
     "end_age" INTEGER,
     PRIMARY KEY("id"),
@@ -232,7 +235,8 @@ CREATE TABLE "npcs" (
     FOREIGN KEY("class") REFERENCES "classes"("id"),
     FOREIGN KEY("second_class") REFERENCES "classes"("id"),
     FOREIGN KEY("third_class") REFERENCES "classes"("id"),
-    FOREIGN KEY("city_id") REFERENCES "cities"("id"),
+    FOREIGN KEY("hometown_id") REFERENCES "cities"("id"),
+    FOREIGN KEY("lived_at_id") REFERENCES "cities"("id"),
     FOREIGN KEY("start_age") REFERENCES "ages"("id"),
     FOREIGN KEY("end_age") REFERENCES "ages"("id")
 );
@@ -386,7 +390,8 @@ JOIN "races" races ON npcs."race_id" = races."id"
 LEFT JOIN "classes" class1 ON npcs."class" = class1."id"
 LEFT JOIN "classes" class2 ON npcs."second_class" = class2."id"
 LEFT JOIN "classes" class3 ON npcs."third_class" = class3."id"
-LEFT JOIN "cities" cities ON npcs."city_id" = cities."id"
+LEFT JOIN "cities" hometown ON npcs."hometown_id" = cities."id"
+LEFT JOIN "cities" cities ON npcs."hometown_id" = cities."id"
 JOIN "ages" ages ON npcs."start_age" = ages."id"
 LEFT JOIN "npc_factions" npc_factions ON npcs."id" = npc_factions."npc_id"
 LEFT JOIN "factions" factions ON npc_factions."faction_id" = factions."id"
