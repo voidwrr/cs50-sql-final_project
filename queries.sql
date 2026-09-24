@@ -31,9 +31,9 @@ FROM "v_npc_sheet"
 WHERE "npc_name" LIKE '%Rurik%';
 
 -- All characters from a certain city
-SELECT *
+SELECT "npc_name", "race", "primary_class", "factions"
 FROM "v_npc_sheet"
-WHERE "city" = 'Waterdeep';
+WHERE "lived_at" = 'Waterdeep' OR "hometown" = 'Waterdeep';
 
 
 -- All cities and the climate from a certain region
