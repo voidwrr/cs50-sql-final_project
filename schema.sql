@@ -388,7 +388,7 @@ SELECT
     COALESCE(GROUP_CONCAT(DISTINCT factions."name"), 'None') AS "factions"
 FROM "npcs" npcs
 JOIN "races" races ON npcs."race_id" = races."id"
-LEFT JOIN "classes" class1 ON npcs."class" = class1."id"
+LEFT JOIN "classes" AS class1 ON npcs."class" = class1."id"
 LEFT JOIN "classes" class2 ON npcs."second_class" = class2."id"
 LEFT JOIN "classes" class3 ON npcs."third_class" = class3."id"
 LEFT JOIN "cities" hometown ON npcs."hometown_id" = cities."id"
