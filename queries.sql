@@ -6,12 +6,29 @@
 INSERT INTO "cities" ("region_id", "start_age", "end_age", "name", "type", "description")
 VALUES (1, 1, NULL, 'Stormwind', 'Capital', 'Coastal stronghold and capital of the human realm.');
 
--- Adding a character and linking to a campaign
+-- Adding a character and linking to a campaign and a faction
 INSERT INTO "chars" ("player_id", "first_name", "middle_name", "last_name", "race_id", "class", "second_class", "third_class", "hometown_id", "start_age", "end_age")
 VALUES (1, 'Valeros', NULL, 'Sunblade', 2, 3, NULL, NULL, 1, 2, NULL);
 
 INSERT INTO "char_campaigns" ("char_id", "campaign_id")
-VALUES (last_insert_rowid(), 1);
+VALUES (1, 1);
+
+INSERT INTO "char_factions" ("char_id", "faction_id", "rank")
+VALUES (1, 1, 'Senior Member');
+
+-- Adding a npc and linking to a faction giving him items and spells
+INSERT INTO "npcs" ("first_name", "middle_name", "last_name", "race_id", "class", "second_class", "third_class", "hometown_id", "lived_at_id", "start_age", "end_age")
+VALUES ('Eldrin', 'The', 'Wise', 1, 4, NULL, NULL, 1, 2, 1, NULL);
+
+INSERT INTO "npc_factions" ("npc_id", "faction_id", "rank")
+VALUES (1, 2, 'Guild Leader');
+
+INSERT INTO "npc_items" ("npc_id", "item_id")
+VALUES (1, 3);
+
+INSERT INTO "npc_spells" ("npc_id", "spell_id")
+VALUES (1, 1), (1, 2);
+
 
 -- ============================================================================
 -- CHARACTERS AND PLAYERS QUERIES
