@@ -37,7 +37,7 @@ CREATE TABLE "cities" (
     "id" INTEGER,
     "region_id" INTEGER NOT NULL,
     "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"), --Checking that end age is later than start age
+    "end_age" INTEGER,
     "name" TEXT NOT NULL UNIQUE,
     "type" TEXT NOT NULL,
     "description" TEXT,
@@ -175,7 +175,7 @@ CREATE TABLE "races" (
 CREATE TABLE "factions" (
     "id" INTEGER,
     "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"), -- Checking that end date is later than start date
+    "end_age" INTEGER,
     "city_id" INTEGER, -- There are factions with unknown location
     "name" TEXT NOT NULL UNIQUE,
     "description" TEXT,
@@ -202,7 +202,7 @@ CREATE TABLE "chars" (
     "third_class" INTEGER
     CHECK ("third_class" IS NULL OR ("third_class" != "class" AND "third_class" != "second_class")), -- Third class can't be the same as the first and second class
     "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"), -- Checking that end date is later than start date
+    "end_age" INTEGER,
     PRIMARY KEY("id"),
     FOREIGN KEY("player_id") REFERENCES "players"("id"),
     FOREIGN KEY("race_id") REFERENCES "races"("id"),
@@ -225,7 +225,7 @@ CREATE TABLE "npcs" (
     CHECK ("third_class" IS NULL OR ("third_class" != "class" AND "third_class" != "second_class")), -- Third class can't be the same as the first and second class
     "city_id" INTEGER, -- There are npcs with unknown location
     "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"), -- Checking that end date is later than start date
+    "end_age" INTEGER,
     PRIMARY KEY("id"),
     FOREIGN KEY("race_id") REFERENCES "races"("id"),
     FOREIGN KEY("class") REFERENCES "classes"("id"),
