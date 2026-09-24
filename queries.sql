@@ -38,12 +38,12 @@ WHERE "city" = 'Waterdeep';
 
 -- All cities and the climate from a certain region
 SELECT
-    c."name" AS "city_name",
-    c."type" AS "city_type",
-    r."name" AS "region_name",
-    r."climate" AS "climate",
-    cont."name" AS "continent"
-FROM "cities" AS c
-JOIN "regions" AS r ON c."region_id" = r."id"
-JOIN "continents" AS cont ON r."continent_id" = cont."id"
-WHERE cont."name" = 'The red desert';
+    "cities"."name" "city_name",
+    "cities"."type" "city_type",
+    "regions"."name" "region_name",
+    "regions"."climate" "climate",
+    "continents"."name" "continent"
+FROM "cities"
+JOIN "regions" ON "cities"."region_id" = "regions"."id"
+JOIN "continents" ON "regions"."continent_id" = "continents"."id"
+WHERE "continents"."name" = 'Eldoria';
