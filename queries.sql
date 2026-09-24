@@ -10,7 +10,7 @@ WHERE "character_name" LIKE '%Rurik%';
 
 -- All characters from a certain player
 SELECT *
-FROM "v_character_sheets"
+FROM "v_character_sheet"
 WHERE "player" = 'voidwrr';
 
 
@@ -21,5 +21,5 @@ WHERE "npc_name" LIKE '%Rurik%';
 
 -- All characters from a certain city
 SELECT *
-FROM "v_character_sheets"
-WHERE "player" = 'voidwrr';
+FROM "v_npc_sheet"
+WHERE "city" = 'Waterdeep';
