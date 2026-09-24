@@ -1,8 +1,8 @@
--- ============================================================================
--- MY RPG WORLD - TYPICAL SQL QUERIES
--- ============================================================================
 
 
+-- ============================================================================
+-- CHARACTERS AND PLAYERS QUERIES
+-- ============================================================================
 -- Complete character sheet
 SELECT *
 FROM "v_character_sheet"
@@ -59,6 +59,15 @@ LEFT JOIN "ages" ages_end ON "factions"."end_age" = ages_end."id"
 WHERE ages_start."start_year" <= 1000
   AND (ages_end."end_year" IS NULL OR a_end."end_year" >= 1000);
 
+-- All npcs from a certain faction and their ranks
+SELECT
+    TRIM("npcs"."first_name" || COALESCE(' ' || "npcs"."middle_name", '') || COALESCE(' ' || "npcs"."last_name", '')) "npc_name",
+    "npc_factions"."rank" "faction_rank",
+    "factions"."name" "faction_name"
+FROM "npcs"
+JOIN "npc_factions" ON "npcs"."id" = "npc_factions"."npc_id"
+JOIN "factions" ON "npc_factions"."faction_id" = "factions"."id"
+WHERE "factions"."name" = 'Thieves Guild';
 
 
 -- Spells from a certain level and school
