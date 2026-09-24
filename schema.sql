@@ -373,10 +373,10 @@ GROUP BY chars."id";
 CREATE VIEW "v_npc_sheet" AS
 SELECT
     npcs."id" AS "npc_id",
-    TRIM (
-        chars."first_name" ||
-        COALESCE(' ' || chars."middle_name", '') ||
-        COALESCE(' ' || chars."last_name", '')
+    TRIM(
+        npcs."first_name" ||
+        COALESCE(' ' || npcs."middle_name", '') ||
+        COALESCE(' ' || npcs."last_name", '')
     ) AS "npc_name",
     races."name" AS "race",
     COALESCE(class1."name", 'Unclassed') AS "primary_class",
@@ -385,17 +385,17 @@ SELECT
     COALESCE(hometown."name", 'Unknown Location') AS "hometown",
     COALESCE(lived_at."name", 'Unknown Location') AS "lived_at",
     ages."name" AS "origin_age",
-    COALESCE(GROUP_CONCAT(DISTINCT factions."name"), 'None') AS "factions"
-FROM "npcs" npcs
-JOIN "races" races ON npcs."race_id" = races."id"
+    COALESCE(GROUP_CONCAT(DISTINCT factions."name", ', '), 'None') AS "factions"
+FROM "npcs" AS npcs
+JOIN "races" AS races ON npcs."race_id" = races."id"
 LEFT JOIN "classes" AS class1 ON npcs."class" = class1."id"
-LEFT JOIN "classes" class2 ON npcs."second_class" = class2."id"
-LEFT JOIN "classes" class3 ON npcs."third_class" = class3."id"
-LEFT JOIN "cities" hometown ON npcs."hometown_id" = cities."id"
-LEFT JOIN "cities" lived_at ON npcs."lived_at_id" = cities."id"
-JOIN "ages" ages ON npcs."start_age" = ages."id"
-LEFT JOIN "npc_factions" npc_factions ON npcs."id" = npc_factions."npc_id"
-LEFT JOIN "factions" factions ON npc_factions."faction_id" = factions."id"
+LEFT JOIN "classes" AS class2 ON npcs."second_class" = class2."id"
+LEFT JOIN "classes" AS class3 ON npcs."third_class" = class3."id"
+LEFT JOIN "cities" AS hometown ON npcs."hometown_id" = hometown."id"
+LEFT JOIN "cities" AS lived_at ON npcs."lived_at_id" = lived_at."id"
+JOIN "ages" AS ages ON npcs."start_age" = ages."id"
+LEFT JOIN "npc_factions" AS npc_factions ON npcs."id" = npc_factions."npc_id"
+LEFT JOIN "factions" AS factions ON npc_factions."faction_id" = factions."id"
 GROUP BY npcs."id";
 
 
