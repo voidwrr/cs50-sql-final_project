@@ -405,7 +405,42 @@ GROUP BY npcs."id";
 -- 11.  SPELL LIST
 -- ============================================================================
 
+CREATE VIEW "v_spell_list" AS
+SELECT
+    'PC' AS "entity_type",
+    TRIM(
+        chars."first_name" ||
+        COALESCE(' ' || chars."middle_name", '') ||
+        COALESCE(' ' || chars."last_name", '')
+    ) AS "caster_name",
+    spells."name" AS "spell_name",
+    spells."level" AS "spell_level",
+    spells."school" AS "school",
+    spells."casting_time" AS "casting_time",
+    spells."range" AS "range",
+    spells."concentration" AS "concentration"
+FROM "char_spells" AS char_spells
+JOIN "chars" AS chars ON char_spells."char_id" = chars."id"
+JOIN "spells" AS spells ON char_spells."spell_id" = spells."id"
 
+UNION ALL
+
+SELECT
+    'NPC' AS "entity_type",
+    TRIM(
+        npcs."first_name" ||
+        COALESCE(' ' || npcs."middle_name", '') ||
+        COALESCE(' ' || npcs."last_name", '')
+    ) AS "caster_name",
+    spells."name" AS "spell_name",
+    spells."level" AS "spell_level",
+    spells."school" AS "school",
+    spells."casting_time" AS "casting_time",
+    spells."range" AS "range",
+    spells."concentration" AS "concentration"
+FROM "npc_spells" AS npc_spells
+JOIN "npcs" AS npcs ON npc_spells."npc_id" = npcs."id"
+JOIN "spells" AS spells ON npc_spells."spell_id" = spells."id";
 
 
 -- ============================================================================
