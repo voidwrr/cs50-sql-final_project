@@ -1,4 +1,13 @@
 -- ============================================================================
+-- ADDING TO THE DATABASE
+-- ============================================================================
+
+--Adding a city
+INSERT INTO "cities" ("region_id", "start_age", "end_age", "name", "type", "description")
+VALUES (1, 1, NULL, 'Stormwind', 'Capital', 'Fortaleza costeira e capital do reino humano.');
+
+
+-- ============================================================================
 -- CHARACTERS AND PLAYERS QUERIES
 -- ============================================================================
 
