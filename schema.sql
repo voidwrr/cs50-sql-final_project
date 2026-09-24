@@ -342,7 +342,7 @@ CREATE INDEX "idx_campaign_chars" ON "char_campaigns"("campaign_id");
 CREATE VIEW "v_character_sheet" AS
 SELECT
     chars."id" AS "char_id",
-    TRIM (
+    TRIM(
         chars."first_name" ||
         COALESCE(' ' || chars."middle_name", '') ||
         COALESCE(' ' || chars."last_name", '')
@@ -352,17 +352,19 @@ SELECT
     class1."name" AS "primary_class",
     class2."name" AS "secondary_class",
     class3."name" AS "third_class",
+    COALESCE(hometown."name", 'Unknown Location') AS "hometown",
     ages."name" AS "era",
-    COALESCE(GROUP_CONCAT(DISTINCT factions."name"), 'None') AS "factions"
-FROM "chars" chars
-JOIN "players" players ON chars."player_id" = players."id"
-JOIN "races" races ON chars."race_id" = races."id"
-JOIN "classes" class1 ON chars."class" = class1."id"
-LEFT JOIN "classes" class2 ON chars."second_class" = class2."id"
-LEFT JOIN "classes" class3 ON chars."third_class" = class3."id"
-JOIN "ages" ages ON chars."start_age" = ages."id"
-LEFT JOIN "char_factions" char_factions ON chars."id" = char_factions."char_id"
-LEFT JOIN "factions" factions ON char_factions."faction_id" = factions."id"
+    COALESCE(GROUP_CONCAT(DISTINCT factions."name", ', '), 'None') AS "factions"
+FROM "chars" AS chars
+JOIN "players" AS players ON chars."player_id" = players."id"
+JOIN "races" AS races ON chars."race_id" = races."id"
+JOIN "classes" AS class1 ON chars."class" = class1."id"
+LEFT JOIN "classes" AS class2 ON chars."second_class" = class2."id"
+LEFT JOIN "classes" AS class3 ON chars."third_class" = class3."id"
+LEFT JOIN "cities" AS hometown ON chars."hometown_id" = hometown."id"
+JOIN "ages" AS ages ON chars."start_age" = ages."id"
+LEFT JOIN "char_factions" AS char_factions ON chars."id" = char_factions."char_id"
+LEFT JOIN "factions" AS factions ON char_factions."faction_id" = factions."id"
 GROUP BY chars."id";
 
 
@@ -403,42 +405,7 @@ GROUP BY npcs."id";
 -- 11.  SPELL LIST
 -- ============================================================================
 
-CREATE VIEW "v_spell_list" AS
-SELECT
-    'PC' AS "entity_type",
-    TRIM (
-        chars."first_name" ||
-        COALESCE(' ' || chars."middle_name", '') ||
-        COALESCE(' ' || chars."last_name", '')
-    ) AS "caster_name",
-    spells."name" AS "spell_name",
-    spells."level" AS "spell_level",
-    spells."school",
-    spells."casting_time",
-    spells."range",
-    spells."concentration"
-FROM "char_spells" char_spells
-JOIN "chars" chars ON char_spells."char_id" = chars."id"
-JOIN "spells" spells ON char_spells."spell_id" = spells."id"
 
-UNION ALL
-
-SELECT
-    'NPC' AS "entity_type",
-    TRIM (
-        chars."first_name" ||
-        COALESCE(' ' || chars."middle_name", '') ||
-        COALESCE(' ' || chars."last_name", '')
-    ) AS "caster_name",
-    spells."name" AS "spell_name",
-    spells."level" AS "spell_level",
-    spells."school",
-    spells."casting_time",
-    spells."range",
-    spells."concentration"
-FROM "npc_spells" npc_spells
-JOIN "npcs" npcs ON npc_spells."npc_id" = npcs."id"
-JOIN "spells" spells ON npc_spells."spell_id" = spells."id";
 
 
 -- ============================================================================
