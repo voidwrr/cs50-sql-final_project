@@ -47,3 +47,27 @@ FROM "cities"
 JOIN "regions" ON "cities"."region_id" = "regions"."id"
 JOIN "continents" ON "regions"."continent_id" = "continents"."id"
 WHERE "continents"."name" = 'Eldoria';
+
+-- All factions from a certain range of time in history
+SELECT
+    "factions"."name" "faction_name",
+    ages_start."name" "founded_in",
+    COALESCE(ages_end."name", 'Presente') "dissolved_in"
+FROM "factions"
+JOIN "ages" ages_start ON "factions"."start_age" = ages_start."id"
+LEFT JOIN "ages" ages_end ON "factions"."end_age" = ages_end."id"
+WHERE ages_start."start_year" <= 1000
+  AND (ages_end."end_year" IS NULL OR a_end."end_year" >= 1000);
+
+
+
+-- Spells from a certain level and school
+SELECT "name", "casting_time", "range", "concentration"
+FROM "spells"
+WHERE "level" = 3 AND "school" = 'Evocation';
+
+-- Items of a specific rarity that needs attunement
+SELECT "name", "type", "description"
+FROM "items"
+WHERE "rarity" IN ('Rare', 'Very Rare', 'Legendary')
+  AND "attunement" = 1;
