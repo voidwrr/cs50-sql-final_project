@@ -6,31 +6,12 @@
 INSERT INTO "cities" ("region_id", "start_age", "end_age", "name", "type", "description")
 VALUES (1, 1, NULL, 'Stormwind', 'Capital', 'Coastal stronghold and capital of the human realm.');
 
-INSERT INTO "chars" (
-    "player_id",
-    "first_name",
-    "middle_name",
-    "last_name",
-    "race_id",
-    "class",
-    "second_class",
-    "third_class",
-    "hometown_id",
-    "start_age",
-    "end_age"
-) VALUES (
-    1,           -- Player ID (players.id)
-    'Valeros',   -- First Name
-    NULL,        -- Middle Name (optional)
-    'Sunblade',  -- Last Name (optional)
-    2,           -- Race ID (races.id)
-    3,           -- Primary Class ID (classes.id)
-    NULL,        -- Second Class ID (optional for multiclassing)
-    NULL,        -- Third Class ID (optional)
-    1,           -- Hometown ID (cities.id)
-    2,           -- Start Era ID (ages.id)
-    NULL         -- End Era ID (NULL if active)
-);
+-- Adding a character and linking to a campaign
+INSERT INTO "chars" ("player_id", "first_name", "middle_name", "last_name", "race_id", "class", "second_class", "third_class", "hometown_id", "start_age", "end_age")
+VALUES (1, 'Valeros', NULL, 'Sunblade', 2, 3, NULL, NULL, 1, 2, NULL);
+
+INSERT INTO "char_campaigns" ("char_id", "campaign_id")
+VALUES (last_insert_rowid(), 1);
 
 -- ============================================================================
 -- CHARACTERS AND PLAYERS QUERIES
