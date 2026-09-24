@@ -58,7 +58,7 @@ CREATE TABLE "campaigns" (
     "age_id" INTEGER,
     "description" TEXT,
     "start_date" DATE DEFAULT CURRENT_DATE NOT NULL,
-    "end_date" DATE CHECK ("end_date" IS NULL OR "end_date" >= "start_date"), --Checking that end date is later than start date
+    "end_date" DATE CHECK ("end_date" IS NULL OR "end_date" >= "start_date"), -- Checking that end date is later than start date
     PRIMARY KEY("id"),
     FOREIGN KEY("age_id") REFERENCES "ages"("id")
 );
@@ -69,7 +69,7 @@ CREATE TABLE "players" (
     "first_name" TEXT,
     "last_name" TEXT,
     "joined_at" DATE DEFAULT CURRENT_DATE NOT NULL,
-    "active" INTEGER NOT NULL DEFAULT 1 CHECK("active" IN (0, 1)),
+    "active" INTEGER NOT NULL DEFAULT 1 CHECK("active" IN (0, 1)), -- 0 stands for players inactive and 1 for players active
     PRIMARY KEY("id")
 );
 
@@ -90,7 +90,7 @@ CREATE TABLE "items" (
         'Legendary',
         'Wondrous')
     ),
-    "attunement" INTEGER NOT NULL DEFAULT 0 CHECK("attunement" IN (0, 1)),
+    "attunement" INTEGER NOT NULL DEFAULT 0 CHECK("attunement" IN (0, 1)), -- 0 stands for spells that doesn't need attunement and 1 for spells that needs
     "description" TEXT,
      PRIMARY KEY("id")
 );
@@ -162,7 +162,7 @@ CREATE TABLE "races" (
     "name" TEXT NOT NULL UNIQUE,
     "size" TEXT,
     "speed" INTEGER NOT NULL DEFAULT 30,
-    "darkvision" INTEGER NOT NULL DEFAULT 0 CHECK("darkvision" IN (0, 1)),
+    "darkvision" INTEGER NOT NULL DEFAULT 0 CHECK("darkvision" IN (0, 1)), -- 0 stands for no darkvision and 1 for having darkvision (for simplification we use just these two types)
     "description" TEXT,
     PRIMARY KEY("id")
 );
@@ -175,8 +175,8 @@ CREATE TABLE "races" (
 CREATE TABLE "factions" (
     "id" INTEGER,
     "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"),
-    "city_id" INTEGER,
+    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"), -- Checking that end date is later than start date
+    "city_id" INTEGER, -- There are factions with unknown location
     "name" TEXT NOT NULL UNIQUE,
     "description" TEXT,
     PRIMARY KEY("id"),
