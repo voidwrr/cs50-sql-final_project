@@ -192,17 +192,17 @@ CREATE TABLE "factions" (
 
 CREATE TABLE "chars" (
     "id" INTEGER,
-    "player_id" INTEGER NOT NULL,
+    "player_id" INTEGER NOT NULL, -- All characters in the table chars must have a player assigned
     "first_name" TEXT NOT NULL,
     "middle_name" TEXT,
-    "last_name" TEXT,
+    "last_name" TEXT,  -- There are characters that have only the first name
     "race_id" INTEGER NOT NULL,
     "class" INTEGER NOT NULL,
-    "second_class" INTEGER CHECK (("second_class" IS NULL OR "second_class" != "class")),
+    "second_class" INTEGER CHECK (("second_class" IS NULL OR "second_class" != "class")), -- Second class can't be the same as the first class
     "third_class" INTEGER
-    CHECK ("third_class" IS NULL OR ("third_class" != "class" AND "third_class" != "second_class")),
+    CHECK ("third_class" IS NULL OR ("third_class" != "class" AND "third_class" != "second_class")), -- Third class can't be the same as the first and second class
     "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER,
+    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"), -- Checking that end date is later than start date
     PRIMARY KEY("id"),
     FOREIGN KEY("player_id") REFERENCES "players"("id"),
     FOREIGN KEY("race_id") REFERENCES "races"("id"),
@@ -211,21 +211,21 @@ CREATE TABLE "chars" (
     FOREIGN KEY("third_class") REFERENCES "classes"("id"),
     FOREIGN KEY("start_age") REFERENCES "ages"("id"),
     FOREIGN KEY("end_age") REFERENCES "ages"("id")
-);
+);  -- As the character in the chars table are player's characters they don't need a city assigned
 
 CREATE TABLE "npcs" (
     "id" INTEGER,
     "first_name" TEXT NOT NULL,
     "middle_name" TEXT,
-    "last_name" TEXT,
+    "last_name" TEXT, -- There are npcs that have only the first name
     "race_id" INTEGER NOT NULL,
-    "class" INTEGER,
-    "second_class" INTEGER CHECK (("second_class" IS NULL OR "second_class" != "class")),
+    "class" INTEGER, -- There are npcs that doesn't have a class
+    "second_class" INTEGER CHECK (("second_class" IS NULL OR "second_class" != "class")), -- Second class can't be the same as the first class
     "third_class" INTEGER
-    CHECK ("third_class" IS NULL OR ("third_class" != "class" AND "third_class" != "second_class")),
-    "city_id" INTEGER,
+    CHECK ("third_class" IS NULL OR ("third_class" != "class" AND "third_class" != "second_class")), -- Third class can't be the same as the first and second class
+    "city_id" INTEGER, -- There are npcs with unknown location
     "start_age" INTEGER NOT NULL,
-    "end_age" INTEGER,
+    "end_age" INTEGER CHECK ("end_age" IS NULL OR "end_age" >= "start_age"), -- Checking that end date is later than start date
     PRIMARY KEY("id"),
     FOREIGN KEY("race_id") REFERENCES "races"("id"),
     FOREIGN KEY("class") REFERENCES "classes"("id"),
