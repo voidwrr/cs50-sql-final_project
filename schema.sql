@@ -471,28 +471,3 @@ SELECT
 FROM "npc_items" npc_items
 JOIN "npcs" npcs ON npc_items."npc_id" = npcs."id"
 JOIN "items" items ON npc_items."item_id" = items."id";
-
-
--- ============================================================================
--- 13.  NPC'S LIST
--- ============================================================================
-
-CREATE VIEW "v_npc_list" AS
-SELECT
-    npcs."id" AS "npc_id",
-    TRIM (
-        chars."first_name" ||
-        COALESCE(' ' || chars."middle_name", '') ||
-        COALESCE(' ' || chars."last_name", '')
-    ) AS "npc_name",
-    races."name" AS "race",
-    COALESCE(classes."name", 'Unclassed') AS "primary_class",
-    COALESCE(cities."name", 'Unknown Location') AS "city",
-    COALESCE(GROUP_CONCAT(DISTINCT factions."name"), 'None') AS "factions"
-FROM "npcs" npcs
-JOIN "races" races ON npcs."race_id" = races."id"
-LEFT JOIN "classes" classes ON npcs."class" = classes."id"
-LEFT JOIN "cities" cities ON npcs."city_id" = cities."id"
-LEFT JOIN "npc_factions" npc_factions ON npcs."id" = npc_factions."npc_id"
-LEFT JOIN "factions" factions ON npc_factions."faction_id" = factions."id"
-GROUP BY npcs."id";

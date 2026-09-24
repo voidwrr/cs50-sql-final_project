@@ -18,3 +18,8 @@ WHERE "player" = 'voidwrr';
 SELECT *
 FROM "v_npc_sheet"
 WHERE "npc_name" LIKE '%Rurik%';
+
+-- All characters from a certain city
+SELECT *
+FROM "v_character_sheets"
+WHERE "player" = 'voidwrr';
