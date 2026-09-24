@@ -2,8 +2,6 @@
 
 By João Victor da Cunha Salvador
 
-Video overview: <URL HERE>
-
 ## Terminology Disclaimer
 
 Throughout this document and schema design, several terms derived from fifth-edition Dungeons & Dragons (D&D 5e) and general tabletop role-playing games (TTRPGs) are used to categorize game mechanics and narrative elements. For clarity, PC refers to Player Characters (entities controlled by human players), while NPC denotes Non-Player Characters (world entities managed by the Dungeon Master). Terms such as Cantrips (level 0 spells), Concentration (a spell property requiring active focus), School of Magic (magical taxonomies like Evocation or Abjuration), Attunement (a mechanic limiting active magic item usage), and Multiclassing (combining multiple character classes) represent standard mechanics used to structure entities, constraints, and analytical views within the database.
